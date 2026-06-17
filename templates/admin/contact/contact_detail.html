@@ -1,0 +1,140 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+
+<style>
+
+.detail-card{
+    background:white;
+    border-radius:20px;
+    padding:40px;
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+
+.detail-card h1{
+    color:#1b60ad;
+    margin-bottom:30px;
+}
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+    margin-bottom:30px;
+}
+
+.info-box{
+    background:#f8fafc;
+    padding:20px;
+    border-radius:12px;
+}
+
+.label{
+    color:#64748b;
+    font-size:13px;
+    margin-bottom:6px;
+}
+
+.value{
+    font-weight:700;
+    color:#1e293b;
+}
+
+.message-box{
+    margin-top:25px;
+    background:#f8fafc;
+    padding:25px;
+    border-radius:12px;
+    line-height:1.8;
+}
+
+.back-btn{
+    display:inline-block;
+    margin-top:30px;
+    background:#1b60ad;
+    color:white;
+    text-decoration:none;
+    padding:12px 22px;
+    border-radius:10px;
+}
+
+</style>
+
+<div class="detail-card">
+
+    <h1>
+        {{ contact.sujet }}
+    </h1>
+
+    <div class="info-grid">
+
+        <div class="info-box">
+
+            <div class="label">
+                Nom
+            </div>
+
+            <div class="value">
+                {{ contact.nom }}
+            </div>
+
+        </div>
+
+        <div class="info-box">
+
+            <div class="label">
+                Email
+            </div>
+
+            <div class="value">
+                {{ contact.email }}
+            </div>
+
+        </div>
+
+        <div class="info-box">
+
+            <div class="label">
+                Téléphone
+            </div>
+
+            <div class="value">
+                {{ contact.telephone }}
+            </div>
+
+        </div>
+
+        <div class="info-box">
+
+            <div class="label">
+                Date
+            </div>
+
+            <div class="value">
+                {{ contact.created_at|date:"d/m/Y H:i" }}
+            </div>
+
+        </div>
+
+    </div>
+
+    <h3>
+        Message
+    </h3>
+
+    <div class="message-box">
+
+        {{ contact.message|linebreaks }}
+
+    </div>
+
+    <a href="{% url 'admin_contact_list' %}"
+       class="back-btn">
+
+        ← Retour aux messages
+
+    </a>
+
+</div>
+
+{% endblock %}

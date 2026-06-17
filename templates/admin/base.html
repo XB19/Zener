@@ -1,0 +1,512 @@
+{% load static %}
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f5f8fb;
+}
+
+.admin-layout{
+    display:flex;
+    min-height:100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+
+    width:280px;
+
+    background:#1b60ad;
+
+    color:white;
+
+    position:fixed;
+
+    top:0;
+    left:0;
+    bottom:0;
+
+    overflow-y:auto;
+}
+
+.logo{
+
+    padding:30px;
+
+    border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+.logo h2{
+
+    font-size:28px;
+    font-weight:800;
+}
+
+.logo span{
+
+    color:#9fc63b;
+    font-size:14px;
+}
+
+.menu{
+    list-style:none;
+    padding:20px 0;
+}
+
+.menu li{
+    margin-bottom:5px;
+}
+
+.menu a{
+
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+    padding:15px 30px;
+
+    color:white;
+
+    text-decoration:none;
+
+    transition:.3s;
+}
+
+.menu a:hover{
+
+    background:#2f7ecb;
+}
+
+.menu a.active{
+
+    background:#9fc63b;
+}
+
+/* MAIN */
+
+.main-content{
+
+    margin-left:280px;
+
+    width:calc(100% - 280px);
+}
+
+/* TOPBAR */
+
+.topbar{
+
+    height:80px;
+
+    background:white;
+
+    display:flex;
+
+    justify-content:space-between;
+    align-items:center;
+
+    padding:0 40px;
+
+    box-shadow:0 2px 15px rgba(0,0,0,.05);
+}
+
+.page-title{
+
+    font-size:24px;
+    font-weight:700;
+    color:#1b60ad;
+}
+
+.admin-user{
+
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.avatar{
+
+    width:45px;
+    height:45px;
+
+    border-radius:50%;
+
+    background:#9fc63b;
+
+    color:white;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-weight:700;
+}
+
+/* CONTENT */
+
+.content{
+    padding:40px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:992px){
+
+    .sidebar{
+        width:80px;
+    }
+
+    .logo span,
+    .menu a span{
+        display:none;
+    }
+
+    .main-content{
+        margin-left:80px;
+        width:calc(100% - 80px);
+    }
+}
+/* =======================
+ICÔNES
+======================= */
+
+.stat-icon i{
+    font-size:30px;
+    line-height:1;
+}
+
+.activity-icon i{
+    font-size:18px;
+    color:white;
+}
+
+.quick-btn i{
+    font-size:20px;
+    min-width:22px;
+}
+
+.box-title h2 i{
+    font-size:22px;
+    color:#1b60ad;
+}
+
+.dashboard-date i{
+    font-size:18px;
+    margin-right:8px;
+    color:#1b60ad;
+}
+
+.mini-box h3 i{
+    font-size:22px;
+    color:#1b60ad;
+}
+
+.dashboard-list i{
+    color:#9fc63b;
+    font-size:18px;
+    flex-shrink:0;
+}
+.logout-btn{
+
+    width:40px;
+    height:40px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:#f1f5f9;
+    color:#1b60ad;
+
+    text-decoration:none;
+
+    transition:.3s;
+
+}
+
+.logout-btn:hover{
+
+    background:#dc2626;
+    color:white;
+
+    transform:translateY(-2px);
+}
+
+.sidebar-logout{
+
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+
+    padding:20px;
+
+    border-top:1px solid rgba(255,255,255,.1);
+
+}
+
+.sidebar-logout a{
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    color:white;
+    text-decoration:none;
+
+    padding:12px 20px;
+
+    border-radius:8px;
+
+    transition:.3s;
+
+    font-weight:600;
+
+}
+
+.sidebar-logout a:hover{
+
+    background:#dc2626;
+    color:white;
+}
+
+.sidebar{
+    position:fixed;
+    top:0;
+    left:0;
+    bottom:0;
+
+    display:flex;
+    flex-direction:column;
+}
+
+.logo{
+
+    padding:5px;
+
+    background:white;
+
+    border-bottom:1px solid rgba(0,0,0,.08);
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    gap:10px;
+}
+
+/* LOGO IMAGE */
+.logo img{
+
+    width:120px;
+    height:auto;
+
+    object-fit:contain;
+
+}
+
+/* TEXTE ADMIN */
+.logo span{
+
+    font-size:14px;
+    font-weight:600;
+    color:#1b60ad;
+
+}
+
+.topbar{
+    position:fixed;
+    top:0;
+    left:280px; /* largeur sidebar */
+    right:0;
+
+    height:80px;
+
+    background:white;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:0 40px;
+
+    box-shadow:0 2px 15px rgba(0,0,0,.05);
+
+    z-index:1000;
+}
+.main-content{
+    margin-left:280px;
+    margin-top:80px;
+}
+</style>
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ZENER Admin</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link
+href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+rel="stylesheet"
+/>
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+/>
+
+
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+<div class="logo">
+
+    <img src="{% static 'images/logo.png' %}" alt="ZENER">
+
+    <span>Administration</span>
+
+</div>
+
+        <ul class="menu">
+
+            <li>
+                <a href="{% url 'dashboard_home' %}">
+                    <i class="fa-solid fa-house"></i>
+                    Tableau de bord
+                </a>
+            </li>
+
+<li>
+    <a href="{% url 'admin_job_list' %}">
+        <i class="fa-solid fa-briefcase"></i>
+        Offres d'emploi
+    </a>
+</li>
+
+<li>
+    <a href="{% url 'admin_candidatures_list' %}">
+        <i class="fa-solid fa-file-lines"></i>
+        Candidatures
+    </a>
+</li>
+
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-gas-pump"></i>
+                    Stations
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'admin_zencard_list' %}">
+                    <i class="fa-solid fa-credit-card"></i>
+                    ZenCard
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'admin_news_list' %}">
+                    <i class="fa-solid fa-newspaper"></i>
+                    Actualités
+                </a>
+            </li>
+
+<li>
+    <a href="{% url 'admin_contact_list' %}">
+        <i class="fa-solid fa-envelope"></i>
+        Messages Contact
+    </a>
+</li>
+
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-gear"></i>
+                    Paramètres
+                </a>
+            </li>
+
+        </ul>
+
+        <!-- LOGOUT -->
+<div class="sidebar-logout">
+
+    <a href="{% url 'admin_logout' %}">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Déconnexion
+    </a>
+
+</div>
+
+    </aside>
+
+    <!-- MAIN -->
+
+    <div class="main-content">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div class="page-title">
+                Tableau de bord
+            </div>
+
+<div class="admin-user">
+
+    <div class="avatar">
+        {{ request.user.username|first|upper }}
+    </div>
+
+    <span>
+        Bonjour {{ request.user.username }}
+    </span>
+
+    <!-- LOGOUT BUTTON -->
+    <a href="{% url 'admin_logout' %}" class="logout-btn">
+        <i class="fa-solid fa-right-from-bracket"></i>
+    </a>
+
+</div>
+
+        </header>
+
+        <!-- PAGE -->
+
+        <main class="content">
+
+            {% block content %}
+            {% endblock %}
+
+        </main>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

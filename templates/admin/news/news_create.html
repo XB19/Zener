@@ -1,0 +1,118 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+
+<style>
+
+/* FORM CARD */
+.form-card{
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+    max-width:800px;
+}
+
+/* HEADER */
+.form-card h1{
+    color:#1b60ad;
+    margin-bottom:25px;
+}
+
+/* INPUTS */
+.form-group{
+    margin-bottom:20px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:700;
+    color:#1b60ad;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select{
+
+    width:100%;
+    padding:12px 15px;
+
+    border:1px solid #e2e8f0;
+    border-radius:10px;
+
+    outline:none;
+    transition:.3s;
+
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus{
+    border-color:#1b60ad;
+}
+
+/* BUTTON */
+.btn-submit{
+    background:#9fc63b;
+    color:white;
+
+    padding:14px 20px;
+    border:none;
+    border-radius:10px;
+
+    font-weight:700;
+    cursor:pointer;
+}
+
+.btn-submit:hover{
+    background:#8db52f;
+}
+
+</style>
+
+<div class="form-card">
+
+    <h1>Créer une actualité</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label>Titre</label>
+            <input type="text" name="titre" required>
+        </div>
+
+        <div class="form-group">
+            <label>Catégorie</label>
+            <input type="text" name="categorie" required>
+        </div>
+
+        <div class="form-group">
+            <label>Image</label>
+            <input type="file" name="image" required>
+        </div>
+
+        <div class="form-group">
+            <label>Contenu</label>
+            <textarea name="contenu" rows="6" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Statut</label>
+            <select name="actif">
+                <option value="True">Actif</option>
+                <option value="False">Inactif</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn-submit">
+            Publier
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

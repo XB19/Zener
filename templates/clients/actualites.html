@@ -1,0 +1,402 @@
+{% extends 'clients/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+
+/* ==========================
+   HERO
+========================== */
+
+.news-hero{
+    position:relative;
+    height:500px;
+
+    background: url("{% static 'images/about-hero.png' %}");
+    center center/cover no-repeat;
+}
+
+.news-overlay{
+    position:absolute;
+    inset:0;
+
+    background:rgba(27,96,173,.78);
+}
+
+.news-hero-content{
+    position:relative;
+    z-index:2;
+
+    max-width:750px;
+
+    padding-top:100px;
+
+    color:#fff;
+}
+
+.news-badge{
+    display:inline-block;
+
+    background:#9fc63b;
+
+    padding:10px 22px;
+
+    font-size:14px;
+    font-weight:600;
+
+    letter-spacing:1px;
+}
+
+.news-hero-content h1{
+    margin:25px 0;
+
+    font-size:60px;
+    font-weight:800;
+
+    line-height:1.15;
+}
+
+.news-hero-content p{
+    font-size:18px;
+    line-height:1.9;
+}
+
+/* ==========================
+   INTRO
+========================== */
+
+.news-intro{
+    padding:100px 0 70px;
+}
+
+.news-intro-content{
+    max-width:850px;
+}
+
+.section-subtitle{
+    color:#2f7ecb;
+
+    font-size:15px;
+    font-weight:700;
+
+    text-transform:uppercase;
+}
+
+.news-intro-content h2{
+    margin:15px 0 25px;
+
+    font-size:48px;
+    font-weight:800;
+}
+
+.news-intro-content p{
+    line-height:1.9;
+    color:#666;
+}
+
+/* ==========================
+   ARTICLES
+========================== */
+
+.news-section{
+    padding-bottom:100px;
+}
+
+.news-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+}
+
+.news-card{
+    background:#fff;
+
+    border-radius:10px;
+
+    overflow:hidden;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,.08);
+
+    transition:.35s;
+}
+
+.news-card:hover{
+    transform:translateY(-10px);
+}
+
+.news-card img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+}
+
+.news-content{
+    padding:30px;
+}
+
+.news-meta{
+    color:#2f7ecb;
+
+    font-size:13px;
+    font-weight:600;
+
+    margin-bottom:15px;
+
+    text-transform:uppercase;
+}
+
+.news-content h3{
+    font-size:26px;
+    font-weight:700;
+
+    margin-bottom:15px;
+}
+
+.news-content p{
+    color:#666;
+
+    line-height:1.8;
+
+    margin-bottom:25px;
+}
+
+.news-btn{
+    color:#2f7ecb;
+
+    font-weight:600;
+
+    text-decoration:none;
+}
+
+.news-btn:hover{
+    color:#9fc63b;
+}
+
+/* ==========================
+   CTA
+========================== */
+
+.news-cta{
+    background:#2f7ecb;
+
+    color:#fff;
+
+    text-align:center;
+
+    padding:110px 0;
+}
+
+.news-cta h2{
+    font-size:50px;
+    font-weight:800;
+
+    margin-bottom:20px;
+}
+
+.news-cta p{
+    font-size:18px;
+}
+
+.cta-btn{
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    width:240px;
+    height:60px;
+
+    margin-top:35px;
+
+    border-radius:60px;
+
+    background:#9fc63b;
+
+    color:white;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.cta-btn:hover{
+    background:#86b22f;
+
+    color:white;
+
+    transform:translateY(-3px);
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:991px){
+
+    .news-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .news-hero-content h1,
+    .news-intro-content h2,
+    .news-cta h2{
+        font-size:40px;
+    }
+}
+
+@media(max-width:768px){
+
+    .news-grid{
+        grid-template-columns:1fr;
+    }
+
+    .news-hero-content h1{
+        font-size:34px;
+    }
+}
+
+</style>
+
+<!-- HERO -->
+
+<section class="news-hero">
+
+    <div class="news-overlay"></div>
+
+    <div class="container">
+
+        <div class="news-hero-content">
+
+            <span class="news-badge">
+                ACTUALITÉS ZENER
+            </span>
+
+            <h1>
+                Suivez les dernières
+                informations et événements
+                de ZENER
+            </h1>
+
+            <p>
+                Découvrez nos actualités, nos initiatives,
+                nos projets et les événements qui marquent
+                la vie de notre entreprise.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- INTRO -->
+
+<section class="news-intro">
+
+    <div class="container">
+
+        <div class="news-intro-content">
+
+            <span class="section-subtitle">
+                Nos publications
+            </span>
+
+            <h2>
+                Toute l'actualité de ZENER
+            </h2>
+
+            <p>
+                Retrouvez régulièrement les dernières nouvelles
+                concernant nos activités, nos innovations,
+                nos engagements et les évolutions du secteur
+                énergétique au Togo.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ARTICLES -->
+
+<section class="news-section">
+
+    <div class="container">
+
+        <div class="news-grid">
+
+            {% for act in actualites %}
+
+            <article class="news-card">
+
+                {% if act.image %}
+                    <img src="{{ act.image.url }}" alt="{{ act.titre }}">
+                {% else %}
+                    <img src="{% static 'images/news1.jpg' %}" alt="">
+                {% endif %}
+
+                <div class="news-content">
+
+                    <div class="news-meta">
+                        {{ act.categorie }} • {{ act.created_at|date:"d M Y" }}
+                    </div>
+
+                    <h3>
+                        {{ act.titre }}
+                    </h3>
+
+                    <p>
+                        {{ act.contenu|truncatewords:25 }}
+                    </p>
+
+                    <a href="{% url 'news_detail' act.id %}" class="news-btn">
+                        Lire l'article →
+                    </a>
+
+                </div>
+
+            </article>
+
+            {% empty %}
+
+            <p style="text-align:center; grid-column:1/-1; color:#666;">
+                Aucune actualité disponible pour le moment.
+            </p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CTA -->
+
+<section class="news-cta">
+
+    <div class="container">
+
+        <h2>
+            Restons connectés
+        </h2>
+
+        <p>
+            Suivez toutes les actualités de ZENER et nos
+            prochains événements.
+        </p>
+
+        <a href="{% url 'contact' %}" class="cta-btn">
+            Nous contacter
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

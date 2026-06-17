@@ -1,0 +1,195 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+
+<style>
+
+.page-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.page-header h1{
+    color:#1b60ad;
+    font-size:32px;
+    font-weight:800;
+}
+
+.page-header p{
+    color:#64748b;
+}
+
+.table-card{
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+thead{
+    background:#1b60ad;
+}
+
+thead th{
+    color:white;
+    padding:18px;
+    text-align:left;
+}
+
+tbody td{
+    padding:18px;
+    border-bottom:1px solid #edf2f7;
+}
+
+tbody tr:hover{
+    background:#f8fafc;
+}
+
+.badge-new{
+    background:#fff7e6;
+    color:#f59e0b;
+    padding:8px 14px;
+    border-radius:30px;
+    font-weight:700;
+    font-size:12px;
+}
+
+.badge-read{
+    background:#e8f7e2;
+    color:#4b8f1e;
+    padding:8px 14px;
+    border-radius:30px;
+    font-weight:700;
+    font-size:12px;
+}
+
+.btn-view{
+    text-decoration:none;
+    background:#1b60ad;
+    color:white;
+    padding:8px 14px;
+    border-radius:8px;
+    font-size:13px;
+    font-weight:600;
+}
+
+</style>
+
+<div class="page-header">
+
+    <div>
+
+        <h1>
+            Messages Contact
+        </h1>
+
+        <p>
+            Tous les messages envoyés depuis le site.
+        </p>
+
+    </div>
+
+</div>
+
+<div class="table-card">
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Sujet</th>
+                <th>Date</th>
+                <th>Statut</th>
+                <th>Action</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for contact in contacts %}
+
+            <tr>
+
+                <td>
+                    {{ contact.nom }}
+                </td>
+
+                <td>
+                    {{ contact.email }}
+                </td>
+
+                <td>
+                    {{ contact.sujet }}
+                </td>
+
+                <td>
+                    {{ contact.created_at|date:"d/m/Y H:i" }}
+                </td>
+
+                <td>
+
+                    {% if contact.lu %}
+
+                        <span class="badge-read">
+                            Lu
+                        </span>
+
+                    {% else %}
+
+                        <span class="badge-new">
+                            Nouveau
+                        </span>
+
+                    {% endif %}
+
+                </td>
+
+                <td>
+
+                    <a
+                       href="{% url 'admin_contact_detail' contact.id %}"
+                       class="btn-view">
+
+                        Voir
+
+                    </a>
+
+                </td>
+
+            </tr>
+
+            {% empty %}
+
+            <tr>
+
+                <td colspan="6"
+                    style="text-align:center;padding:40px;">
+
+                    Aucun message reçu.
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

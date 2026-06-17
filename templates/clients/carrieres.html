@@ -1,0 +1,777 @@
+{% extends 'clients/base.html' %}
+{% load static %}
+
+{% block content %}
+{% if messages %}
+    {% for message in messages %}
+        <div class="success-message">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<style>
+.success-message{
+    background:#d4edda;
+    color:#155724;
+    border:1px solid #c3e6cb;
+    padding:16px 20px;
+    margin:20px auto;
+    max-width:1200px;
+    border-radius:8px;
+}
+/* ==========================
+   HERO
+========================== */
+
+.career-hero{
+    position:relative;
+    height:500px;
+
+    background: url("{% static 'images/about-hero.png' %}");
+    center center/cover no-repeat;
+}
+
+.career-overlay{
+    position:absolute;
+    inset:0;
+
+    background:rgba(27,96,173,.80);
+}
+
+.career-content{
+    position:relative;
+    z-index:2;
+
+    color:white;
+
+    max-width:750px;
+
+    padding-top:100px;
+}
+
+.career-badge{
+    display:inline-block;
+
+    background:#9fc63b;
+
+    padding:10px 22px;
+
+    font-weight:600;
+}
+
+.career-content h1{
+    font-size:60px;
+    font-weight:800;
+
+    margin:25px 0;
+}
+
+.career-content p{
+    font-size:18px;
+    line-height:1.8;
+}
+
+/* ==========================
+   INTRO
+========================== */
+
+.career-intro{
+    padding:100px 0;
+}
+
+.career-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:70px;
+    align-items:center;
+}
+
+.career-image img{
+    width:100%;
+    border-radius:10px;
+}
+
+.career-text h2{
+    font-size:42px;
+    margin-bottom:25px;
+}
+
+.career-text p{
+    line-height:1.9;
+}
+
+/* ==========================
+   VALEURS RH
+========================== */
+
+.hr-values{
+    padding:100px 0;
+    background:#f6f8fb;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:60px;
+}
+
+.section-title h2{
+    font-size:42px;
+}
+
+.values-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+}
+
+.value-card{
+    background:white;
+
+    padding:35px;
+
+    text-align:center;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    transition:.3s;
+}
+
+.value-card:hover{
+    transform:translateY(-10px);
+}
+
+.value-card h3{
+    color:#2f7ecb;
+    margin-bottom:15px;
+}
+
+/* ==========================
+   CHIFFRES
+========================== */
+
+.career-stats{
+    background:#2f7ecb;
+    padding:90px 0;
+}
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+}
+
+.stat-box{
+    text-align:center;
+    color:white;
+}
+
+.stat-box span{
+    display:block;
+    font-size:55px;
+    font-weight:800;
+}
+
+/* ==========================
+   OFFRES
+========================== */
+
+.jobs-section{
+    padding:100px 0;
+}
+
+.jobs-list{
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+}
+
+.job-card{
+    background:white;
+
+    padding:35px;
+
+    border-left:5px solid #9fc63b;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.job-card h3{
+    color:#2f7ecb;
+}
+
+.job-card p{
+    margin-top:10px;
+}
+
+.job-btn{
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    width:180px;
+    height:50px;
+
+    border-radius:40px;
+
+    background:#2f7ecb;
+    color:white;
+
+    text-decoration:none;
+}
+
+/* ==========================
+   CANDIDATURE
+========================== */
+
+.application-section{
+    padding:100px 0;
+    background:#f6f8fb;
+}
+
+.application-box{
+    max-width:900px;
+    margin:auto;
+
+    background:white;
+
+    padding:60px;
+
+    box-shadow:0 10px 35px rgba(0,0,0,.08);
+}
+
+.application-box h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.application-box p{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.form-group.full{
+    grid-column:span 2;
+}
+
+.form-group input,
+.form-group textarea{
+    padding:15px;
+    border:1px solid #ddd;
+}
+
+.form-group textarea{
+    min-height:180px;
+    resize:none;
+}
+
+.submit-btn{
+    margin-top:20px;
+
+    width:220px;
+    height:58px;
+
+    border:none;
+
+    border-radius:50px;
+
+    background:#9fc63b;
+
+    color:white;
+
+    font-weight:600;
+}
+
+/* ==========================
+   CTA
+========================== */
+
+.career-cta{
+    padding:100px 0;
+
+    text-align:center;
+
+    background:#2f7ecb;
+
+    color:white;
+}
+
+.career-cta h2{
+    font-size:48px;
+    margin-bottom:20px;
+}
+
+.cta-btn{
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    width:240px;
+    height:60px;
+
+    margin-top:25px;
+
+    background:#9fc63b;
+
+    color:white;
+
+    text-decoration:none;
+
+    border-radius:50px;
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:992px){
+
+    .career-grid,
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .values-grid,
+    .stats-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .form-group.full{
+        grid-column:auto;
+    }
+
+    .job-card{
+        flex-direction:column;
+        gap:20px;
+        text-align:center;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .career-content h1{
+        font-size:42px;
+    }
+
+    .values-grid,
+    .stats-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+.file-label{
+    display:block;
+    margin-bottom:8px;
+    font-size:14px;
+    font-weight:600;
+    color:#1b60ad;
+}
+
+.form-group input[type="file"]{
+    width:100%;
+    padding:12px;
+    border:1px solid #dce5f0;
+    border-radius:8px;
+    background:#f8fafc;
+    font-size:14px;
+    cursor:pointer;
+}
+
+.form-group input[type="file"]::file-selector-button{
+    background:#1b60ad;
+    color:white;
+    border:none;
+    padding:10px 18px;
+    border-radius:6px;
+    margin-right:12px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.form-group input[type="file"]::file-selector-button:hover{
+    background:#154c89;
+}
+
+</style>
+
+<!-- HERO -->
+
+<section class="career-hero">
+
+    <div class="career-overlay"></div>
+
+    <div class="container">
+
+        <div class="career-content">
+
+            <span class="career-badge">
+                CARRIÈRES
+            </span>
+
+            <h1>
+                Construisez votre avenir avec ZENER
+            </h1>
+
+            <p>
+                Rejoignez une entreprise dynamique qui participe
+                activement au développement énergétique du Togo
+                et investit dans le talent de ses collaborateurs.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- INTRO -->
+
+<section class="career-intro">
+
+    <div class="container">
+
+        <div class="career-grid">
+
+            <div class="career-image">
+
+                <img src="{% static 'images/career-team.png' %}" alt="">
+
+            </div>
+
+            <div class="career-text">
+
+                <h2>
+                    Pourquoi rejoindre ZENER ?
+                </h2>
+
+                <p>
+                    Chez ZENER, nous croyons que notre réussite repose
+                    sur les femmes et les hommes qui composent notre équipe.
+                    Nous favorisons le développement des compétences,
+                    l'innovation et l'esprit d'équipe.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- VALEURS -->
+
+<section class="hr-values">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>Nos engagements RH</h2>
+
+        </div>
+
+        <div class="values-grid">
+
+            <div class="value-card">
+                <h3>Formation</h3>
+                <p>Développer les compétences.</p>
+            </div>
+
+            <div class="value-card">
+                <h3>Innovation</h3>
+                <p>Encourager les idées nouvelles.</p>
+            </div>
+
+            <div class="value-card">
+                <h3>Évolution</h3>
+                <p>Offrir des perspectives de carrière.</p>
+            </div>
+
+            <div class="value-card">
+                <h3>Bien-être</h3>
+                <p>Valoriser chaque collaborateur.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CHIFFRES -->
+
+<section class="career-stats">
+
+    <div class="container">
+
+        <div class="stats-grid">
+
+            <div class="stat-box">
+                <span>350+</span>
+                Partenaires
+            </div>
+
+            <div class="stat-box">
+                <span>25+</span>
+                Stations
+            </div>
+
+            <div class="stat-box">
+                <span>15+</span>
+                Ans d'expérience
+            </div>
+
+            <div class="stat-box">
+                <span>100%</span>
+                Engagement
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- OFFRES -->
+
+<section class="jobs-section">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>Offres d'emploi</h2>
+
+        </div>
+
+<div class="jobs-list">
+
+    {% for offre in offres %}
+
+    <div class="job-card">
+
+        <div class="job-info">
+
+            <h3>
+                {{ offre.titre }}
+            </h3>
+
+            <p>
+
+                <strong>
+                    {{ offre.ville }}
+                </strong>
+
+                •
+
+                {{ offre.type_contrat }}
+
+                {% if offre.departement %}
+                    • {{ offre.departement }}
+                {% endif %}
+
+            </p>
+
+            {% if offre.date_limite %}
+
+            <div class="job-date">
+
+                Date limite :
+                {{ offre.date_limite|date:"d/m/Y" }}
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+        <a href="{% url 'job_detail' offre.id %}"
+           class="job-btn">
+
+            Postuler
+
+        </a>
+
+    </div>
+
+    {% empty %}
+
+    <div class="no-job">
+
+        <i class="ri-briefcase-line"></i>
+
+        <h3>
+            Aucune offre disponible actuellement
+        </h3>
+
+        <p>
+            Revenez bientôt pour découvrir nos nouvelles opportunités.
+        </p>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+    </div>
+
+</section>
+
+<!-- CANDIDATURE -->
+
+<section class="application-section">
+
+    <div class="container">
+
+        <div class="application-box">
+
+            <h2>
+                Candidature spontanée
+            </h2>
+
+            <p>
+                Vous ne trouvez pas l'offre correspondant à votre profil ?
+                Envoyez-nous votre candidature et notre équipe l'étudiera avec attention.
+            </p>
+
+            <form method="POST" enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <input
+                            type="text"
+                            name="nom"
+                            placeholder="Nom complet"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Adresse email"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <input
+                            type="tel"
+                            name="telephone"
+                            placeholder="Téléphone"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <input
+                            type="text"
+                            name="poste"
+                            placeholder="Poste recherché"
+                        >
+                    </div>
+
+                    <!-- Upload CV -->
+
+                    <div class="form-group">
+
+                        <label class="file-label">
+                            Curriculum Vitae (CV) *
+                        </label>
+
+                        <input
+                            type="file"
+                            name="cv"
+                            accept=".pdf,.doc,.docx"
+                            required
+                        >
+
+                    </div>
+
+                    <!-- Upload Lettre -->
+
+                    <div class="form-group">
+
+                        <label class="file-label">
+                            Lettre de motivation
+                        </label>
+
+                        <input
+                            type="file"
+                            name="lettre_motivation"
+                            accept=".pdf,.doc,.docx"
+                        >
+
+                    </div>
+
+                    <div class="form-group full">
+
+                        <textarea
+                            name="message"
+                            placeholder="Présentez brièvement votre profil, vos compétences ou votre motivation..."
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    Envoyer ma candidature
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CTA -->
+
+<section class="career-cta">
+
+    <div class="container">
+
+        <h2>
+            Rejoignez l'aventure ZENER
+        </h2>
+
+        <p>
+            Ensemble, construisons l'énergie de demain.
+        </p>
+
+        <a href="{% url 'contact' %}" class="cta-btn">
+            Nous contacter
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

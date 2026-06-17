@@ -1,0 +1,284 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+
+<style>
+
+.page-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.page-header h1{
+    color:#1b60ad;
+    font-size:32px;
+    font-weight:800;
+    margin-bottom:6px;
+}
+
+.page-header p{
+    color:#6b7280;
+}
+
+.btn-primary{
+    background:#9fc63b;
+    color:white;
+    text-decoration:none;
+    padding:14px 24px;
+    border-radius:12px;
+    font-weight:700;
+    transition:.3s;
+}
+
+.btn-primary:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 20px rgba(159,198,59,.25);
+}
+
+.table-card{
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+
+.table-card table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.table-card thead{
+    background:#1b60ad;
+}
+
+.table-card thead th{
+    color:white;
+    padding:18px;
+    text-align:left;
+    font-size:14px;
+    font-weight:700;
+}
+
+.table-card tbody tr{
+    border-bottom:1px solid #edf2f7;
+    transition:.3s;
+}
+
+.table-card tbody tr:hover{
+    background:#f8fafc;
+}
+
+.table-card td{
+    padding:18px;
+    color:#334155;
+    font-size:14px;
+}
+
+.badge-success{
+    background:rgba(159,198,59,.15);
+    color:#7ca321;
+    padding:8px 14px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:700;
+}
+
+.badge-danger{
+    background:rgba(220,38,38,.10);
+    color:#dc2626;
+    padding:8px 14px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:700;
+}
+
+.actions{
+    display:flex;
+    gap:10px;
+}
+
+.btn-edit{
+    text-decoration:none;
+    background:#1b60ad;
+    color:white;
+    padding:8px 14px;
+    border-radius:8px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.btn-delete{
+    text-decoration:none;
+    background:#dc2626;
+    color:white;
+    padding:8px 14px;
+    border-radius:8px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.empty-state{
+    text-align:center;
+    padding:40px;
+    color:#64748b;
+}
+
+@media(max-width:992px){
+
+    .page-header{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
+    }
+
+    .table-card{
+        overflow-x:auto;
+    }
+
+    table{
+        min-width:900px;
+    }
+
+}
+
+</style>
+
+<div class="page-header">
+
+    <div>
+
+        <h1>
+            Gestion des offres
+        </h1>
+
+        <p>
+            Publiez et gérez les offres d'emploi ZENER.
+        </p>
+
+    </div>
+
+    <a href="{% url 'admin_job_create' %}"
+       class="btn-primary">
+
+        + Nouvelle offre
+
+    </a>
+
+</div>
+
+<div class="table-card">
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Poste</th>
+                <th>Ville</th>
+                <th>Contrat</th>
+                <th>Département</th>
+                <th>Statut</th>
+                <th>Date</th>
+                <th>Actions</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for offre in offres %}
+
+            <tr>
+
+                <td>
+                    <strong>{{ offre.titre }}</strong>
+                </td>
+
+                <td>
+                    {{ offre.ville }}
+                </td>
+
+                <td>
+                    {{ offre.type_contrat }}
+                </td>
+
+                <td>
+                    {{ offre.departement }}
+                </td>
+
+                <td>
+
+                    {% if offre.actif %}
+
+                        <span class="badge-success">
+                            Active
+                        </span>
+
+                    {% else %}
+
+                        <span class="badge-danger">
+                            Fermée
+                        </span>
+
+                    {% endif %}
+
+                </td>
+
+                <td>
+                    {{ offre.created_at|date:"d/m/Y" }}
+                </td>
+
+                <td>
+
+                    <div class="actions">
+
+                        <a href="{% url 'admin_job_edit' offre.id %}"
+                           class="btn-edit">
+
+                            Modifier
+
+                        </a>
+
+                        <a href="{% url 'admin_job_delete' offre.id %}"
+                           class="btn-delete"
+                           onclick="return confirm('Supprimer cette offre ?')">
+
+                            Supprimer
+
+                        </a>
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+            {% empty %}
+
+            <tr>
+
+                <td colspan="7">
+
+                    <div class="empty-state">
+
+                        Aucune offre disponible pour le moment.
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

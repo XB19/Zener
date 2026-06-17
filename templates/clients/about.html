@@ -1,0 +1,439 @@
+{% extends 'clients/base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    /* HERO */
+
+.about-hero{
+    position:relative;
+    height:500px;
+    background: url("{% static 'images/about-hero.png' %}");
+    center center/cover no-repeat;
+}
+
+.about-overlay{
+    position:absolute;
+    inset:0;
+    background:rgba(27,96,173,.75);
+}
+
+.about-hero-content{
+    position:relative;
+    z-index:2;
+    color:#fff;
+    padding-top:100px;
+    max-width:700px;
+}
+
+.about-badge{
+    background:#9fc63b;
+    padding:10px 20px;
+    display:inline-block;
+    font-weight:600;
+}
+
+.about-hero-content h1{
+    font-size:60px;
+    margin:25px 0;
+    font-weight:800;
+}
+
+.about-hero-content p{
+    font-size:18px;
+    line-height:1.8;
+}
+
+/* SECTION */
+
+.about-company{
+    padding:100px 0;
+}
+
+.about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:70px;
+    align-items:center;
+}
+
+.about-image img{
+    width:100%;
+    border-radius:8px;
+}
+
+.section-subtitle{
+    color:#2f7ecb;
+    font-weight:700;
+}
+
+.about-text h2{
+    margin:15px 0 25px;
+    font-size:42px;
+}
+
+.about-text p{
+    line-height:1.9;
+}
+
+.about-text ul{
+    margin-top:25px;
+}
+
+.about-text li{
+    margin-bottom:12px;
+}
+
+/* STATS */
+
+.about-stats{
+    background:#2f7ecb;
+    padding:90px 0;
+}
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:30px;
+}
+
+.stat-box{
+    text-align:center;
+    color:white;
+}
+
+.counter{
+    display:block;
+    font-size:58px;
+    font-weight:800;
+}
+
+.stat-box p{
+    margin-top:10px;
+}
+
+/* VALEURS */
+
+.values-section{
+    padding:100px 0;
+}
+
+.section-heading{
+    text-align:center;
+    margin-bottom:60px;
+}
+
+.values-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+}
+
+.value-card{
+    background:#fff;
+    padding:35px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.value-card:hover{
+    transform:translateY(-10px);
+}
+
+/* MISSION */
+
+.mission-section{
+    background:#f5f8fb;
+    padding:100px 0;
+}
+
+.mission-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:30px;
+}
+
+.mission-card{
+    background:white;
+    padding:50px;
+    border-left:5px solid #9fc63b;
+}
+
+/* CTA */
+
+.about-cta{
+    padding:100px 0;
+    text-align:center;
+    background:#2f7ecb;
+    color:white;
+}
+
+.about-cta h2{
+    font-size:48px;
+    margin-bottom:20px;
+}
+
+.cta-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    width:220px;
+    height:58px;
+
+    margin-top:30px;
+
+    border-radius:50px;
+
+    background:#9fc63b;
+    color:white;
+
+    text-decoration:none;
+    font-weight:600;
+}
+</style>
+
+<!-- HERO -->
+
+<section class="about-hero">
+
+    <div class="about-overlay"></div>
+
+    <div class="container">
+
+        <div class="about-hero-content">
+
+            <span class="about-badge">
+                À PROPOS DE ZENER
+            </span>
+
+            <h1>
+                Une entreprise engagée
+                au service de l'énergie
+                et du développement
+            </h1>
+
+</section>
+
+<!-- QUI SOMMES NOUS -->
+
+<section class="about-company">
+
+    <div class="container">
+
+        <div class="about-grid">
+
+            <div class="about-image">
+
+                <img
+                    src="{% static 'images/about-company.png' %}"
+                    alt=""
+                >
+
+            </div>
+
+            <div class="about-text">
+
+                <span class="section-subtitle">
+                    Qui sommes-nous ?
+                </span>
+
+                <h2>
+                    Un acteur majeur de l'énergie au Togo
+                </h2>
+
+                <p>
+                    ZENER contribue activement au développement
+                    économique à travers un réseau de stations-services,
+                    des produits pétroliers de qualité et des services
+                    énergétiques de proximité.
+                </p>
+
+                <ul>
+
+                    <li>Qualité certifiée</li>
+                    <li>Couverture nationale</li>
+                    <li>Service client réactif</li>
+                    <li>Innovation permanente</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CHIFFRES -->
+
+<section class="about-stats">
+
+    <div class="container">
+
+        <div class="stats-grid">
+
+            <div class="stat-box">
+
+                <span class="counter" data-target="25">
+                    0
+                </span>
+
+                <p>Stations-services</p>
+
+            </div>
+
+            <div class="stat-box">
+
+                <span class="counter" data-target="15">
+                    0
+                </span>
+
+                <p>Partenaires</p>
+
+            </div>
+
+            <div class="stat-box">
+
+                <span class="counter" data-target="5000000">
+                    0
+                </span>
+
+                <p>Clients satisfaits</p>
+
+            </div>
+
+            <div class="stat-box">
+
+                <span class="counter" data-target="15">
+                    0
+                </span>
+
+                <p>Années d'expérience</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- VALEURS -->
+
+<section class="values-section">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <h2>Nos valeurs</h2>
+
+        </div>
+
+        <div class="values-grid">
+
+            <div class="value-card">
+
+                <h3>Fiabilité</h3>
+
+                <p>
+                    Des solutions énergétiques sûres et durables.
+                </p>
+
+            </div>
+
+            <div class="value-card">
+
+                <h3>Excellence</h3>
+
+                <p>
+                    La qualité au cœur de toutes nos activités.
+                </p>
+
+            </div>
+
+            <div class="value-card">
+
+                <h3>Innovation</h3>
+
+                <p>
+                    Développer les solutions de demain.
+                </p>
+
+            </div>
+
+            <div class="value-card">
+
+                <h3>Proximité</h3>
+
+                <p>
+                    Être proche de nos clients partout.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- MISSION VISION -->
+
+<section class="mission-section">
+
+    <div class="container">
+
+        <div class="mission-grid">
+
+            <div class="mission-card">
+
+                <h3>Notre mission</h3>
+
+                <p>
+                    Fournir une énergie fiable, accessible et durable.
+                </p>
+
+            </div>
+
+            <div class="mission-card">
+
+                <h3>Notre vision</h3>
+
+                <p>
+                    Devenir une référence énergétique en Afrique de l'Ouest.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CTA -->
+
+<section class="about-cta">
+
+    <div class="container">
+
+        <h2>
+            Construisons l'énergie de demain ensemble
+        </h2>
+
+        <p>
+            Nous accompagnons vos besoins énergétiques partout au Togo.
+        </p>
+
+        <a href="{% url 'contact' %}" class="cta-btn">
+            Nous contacter
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

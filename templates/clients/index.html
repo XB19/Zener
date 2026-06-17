@@ -1,0 +1,623 @@
+{% extends 'clients/base.html' %}
+{% load static %}
+
+{% block title %}
+Accueil | ZENER
+{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+<div class="home-page">
+    <!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-gradient"></div>
+
+    <div class="hero-content">
+
+        <h1 class="hero-title">
+
+            <span class="hero-line">
+                <strong>L'énergie</strong> qui
+            </span>
+
+            <span class="hero-line">
+                accompagne le
+            </span>
+
+            <span class="hero-line hero-bold">
+                développement
+            </span>
+
+            <span class="hero-line">
+                du <strong>Togo</strong>
+            </span>
+
+        </h1>
+
+        <p class="hero-description">
+
+            ZENER met à la disposition des particuliers,
+            entreprises et industries des solutions énergétiques
+            fiables à travers un réseau de stations-services,
+            de produits pétroliers et de services de proximité
+            sur toute l'étendue du territoire.
+
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="{% url 'services' %}" class="hero-btn">
+                Explorer nos solutions
+            </a>
+
+            <a href="{% url 'zencard' %}" class="hero-btn hero-btn-outline">
+                Obtenir sa ZenCard
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+    <!-- PRESENTATION -->
+
+    <section class="presentation container">
+
+        <div class="section-badge">
+            Un acteur majeur du secteur énergétique au Togo
+        </div>
+
+        <div class="presentation-grid">
+
+            <div class="presentation-image">
+
+                <img src="{% static 'images/station.png' %}" alt="Station Zener">
+
+            </div>
+
+            <div class="presentation-text">
+
+                <p>
+                    Depuis plusieurs années, ZENER s'engage à fournir
+                    des produits et services énergétiques de qualité
+                    répondant aux besoins des ménages, des entreprises
+                    et des institutions.
+
+                    Notre ambition est de contribuer durablement au
+                    développement économique et social du pays grâce
+                    à une énergie accessible, performante et responsable.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- STATS -->
+
+   <section class="stats-section">
+
+    <div class="stats-wrapper">
+
+        <div class="stat-item">
+
+            <div class="stat-circle">
+                +
+                <span class="counter" data-target="25">0</span>
+            </div>
+
+            <p>Stations-services</p>
+
+        </div>
+
+        <div class="stat-divider"></div>
+
+        <div class="stat-item">
+
+            <div class="stat-circle">
+                +
+                <span class="counter" data-target="20">0</span>
+            </div>
+
+            <p>Partenaires</p>
+
+        </div>
+
+ 
+
+
+
+        <div class="stat-divider"></div>
+
+        <div class="stat-item">
+
+            <div class="stat-circle">
+                +
+                <span class="counter" data-target="20">0</span>
+            </div>
+
+            <p>Années d'expérience</p>
+
+        </div>
+
+    </div>
+
+<section class="expertise-section">
+
+    <div class="expertise-container">
+
+        <div class="section-title">
+            Nos domaines d'expertise
+        </div>
+
+        <div class="expertise-slider">
+
+            <div class="expertise-track">
+
+                <!-- 1 -->
+                <article class="expertise-card">
+                    <img src="{% static 'images/card1.jpg' %}" alt="">
+                    <div class="card-overlay">
+                        <h3>Distribution de carburants</h3>
+                        <p>
+                            Réseau national de stations-services
+                            assurant une distribution fiable.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- 2 -->
+                <article class="expertise-card">
+                    <img src="{% static 'images/card2.jpg' %}" alt="">
+                    <div class="card-overlay">
+                        <h3>Gaz & énergie domestique</h3>
+                        <p>
+                            Solutions énergétiques adaptées
+                            aux besoins des ménages.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- 3 -->
+                <article class="expertise-card">
+                    <img src="{% static 'images/card3.jpg' %}" alt="">
+                    <div class="card-overlay">
+                        <h3>Mobilité & services</h3>
+                        <p>
+                            Services innovants
+                            pour particuliers et entreprises.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- 4 -->
+                <article class="expertise-card">
+                    <img src="{% static 'images/card4.jpg' %}" alt="">
+                    <div class="card-overlay">
+                        <h3>Lubrifiants & accessoires</h3>
+                        <p>
+                            Produits professionnels
+                            haute performance.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- 5 -->
+                <article class="expertise-card">
+                    <img src="{% static 'images/card5.jpg' %}" alt="">
+                    <div class="card-overlay">
+                        <h3>Environnement & écosystème</h3>
+                        <p>
+                            Initiatives durables et actions
+                            en faveur de la préservation de l’environnement.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- DUPLICATION -->
+
+                <article class="expertise-card">
+                    <img src="{% static 'images/card1.jpg' %}" alt="">
+                    <div class="card-overlay">
+                        <h3>Distribution de carburants</h3>
+                        <p>
+                            Réseau national de stations-services.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="expertise-card">
+                    <img src="{% static 'images/card2.jpg' %}" alt="">
+                    <div class="card-overlay">
+                        <h3>Gaz & énergie domestique</h3>
+                        <p>
+                            Solutions énergétiques adaptées.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="expertise-card">
+                    <img src="{% static 'images/card3.jpg' %}" alt="">
+                    <div class="card-overlay">
+                        <h3>Mobilité & services</h3>
+                        <p>
+                            Services innovants.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="expertise-card">
+                    <img src="{% static 'images/card4.jpg' %}" alt="">
+                    <div class="card-overlay">
+                        <h3>Lubrifiants & accessoires</h3>
+                        <p>
+                            Produits professionnels.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="expertise-card">
+                    <img src="{% static 'images/card5.jpg' %}" alt="">
+                    <div class="card-overlay">
+                        <h3>Environnement & écosystème</h3>
+                        <p>
+                            Initiatives durables et actions environnementales.
+                        </p>
+                    </div>
+                </article>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+    <section class="expertise-banner">
+
+    <div class="expertise-banner-overlay"></div>
+
+    <div class="expertise-banner-content">
+
+        <div class="banner-title">
+            Nos stations sur le territoire togolais
+        </div>
+
+        <p>
+            Grâce à notre réseau de stations-services réparties sur le territoire
+            national, nous garantissons une proximité et une disponibilité
+            permanente de nos produits et services.
+        </p>
+
+        <a href="{% url 'stations' %}" class="banner-btn">
+            Voir toutes nos stations
+        </a>
+
+    </div>
+
+</section>
+
+<section class="engagements container">
+
+    <div class="section-title">
+        Nos engagements
+    </div>
+
+    <div class="engagements-grid">
+
+        <article class="engagement-card">
+            <img src="{% static 'images/station1.png' %}" alt="Qualité">
+
+            <div class="engagement-content">
+                <h3>Qualité</h3>
+                <p>
+                    Nous garantissons des produits et services conformes aux normes les plus exigeantes du secteur.
+                </p>
+            </div>
+        </article>
+
+        <article class="engagement-card">
+            <img src="{% static 'images/securite.jpg' %}" alt="Sécurité">
+
+            <div class="engagement-content">
+                <h3>Sécurité</h3>
+                <p>
+                    La protection de nos clients, collaborateurs et infrastructures demeure notre priorité absolue.
+                </p>
+            </div>
+        </article>
+
+        <article class="engagement-card">
+            <img src="{% static 'images/qualite2.jpg' %}" alt="Responsabilité">
+
+            <div class="engagement-content">
+                <h3>Responsabilité</h3>
+                <p>
+                    Nous favorisons un développement durable à travers des actions responsables et respectueuses de l’environnement.
+                </p>
+            </div>
+        </article>
+
+    </div>
+
+</section>
+
+<section class="shop-section">
+
+    <div class="shop-title">
+        NOTRE ESPACE BOUTIQUE
+    </div>
+
+    <div class="container">
+
+        <div class="shop-slider-wrapper">
+
+            <div class="swiper shopSwiper">
+
+                <div class="swiper-wrapper">
+
+                    <div class="swiper-slide">
+                        <div class="shop-product-card">
+                            <img src="{% static 'images/gaz.jpeg' %}" alt="">
+                            <h4>Abrié (12.5 kg)</h4>
+                            <span>34 875 CFA</span>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="shop-product-card">
+                            <img src="{% static 'images/gaz.jpeg' %}" alt="">
+                            <h4>Abrié (12.5 kg)</h4>
+                            <span>34 875 CFA</span>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="shop-product-card">
+                            <img src="{% static 'images/gaz.jpeg' %}" alt="">
+                            <h4>Abrié (12.5 kg)</h4>
+                            <span>34 875 CFA</span>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="shop-product-card">
+                            <img src="{% static 'images/gaz.jpeg' %}" alt="">
+                            <h4>Abrié (12.5 kg)</h4>
+                            <span>34 875 CFA</span>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="shop-product-card">
+                            <img src="{% static 'images/gaz.jpeg' %}" alt="">
+                            <h4>Abrié (12.5 kg)</h4>
+                            <span>34 875 CFA</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="shop-prev">
+                <i class="fa-solid fa-chevron-left"></i>
+            </div>
+
+            <div class="shop-next">
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+
+        </div>
+
+        <div class="shop-footer">
+
+            <a href="{% url 'boutique' %}" class="shop-btn">
+                Voir la boutique
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="news-section container">
+
+    <div class="section-title">
+        Nos Actualités
+    </div>
+
+    <div class="news-wrapper">
+
+        <div class="news-grid">
+
+            <article class="news-card">
+
+                <span>NEWS · 28.05.2024</span>
+
+                <h3>POLITIQUE QHSE</h3>
+
+                <p>
+                    Tous les jours, nous apportons de l'énergie au Togo et...
+                </p>
+
+                <a href="#">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+            </article>
+
+            <article class="news-card">
+
+                <span>NEWS · 28.05.2024</span>
+
+                <h3>POLITIQUE QHSE</h3>
+
+                <p>
+                    Tous les jours, nous apportons de l'énergie au Togo et...
+                </p>
+
+                <a href="#">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+            </article>
+
+            <article class="news-card">
+
+                <span>NEWS · 28.05.2024</span>
+
+                <h3>POLITIQUE QHSE</h3>
+
+                <p>
+                    Tous les jours, nous apportons de l'énergie au Togo et...
+                </p>
+
+                <a href="#">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+            </article>
+
+        </div>
+
+        <div class="news-btn-wrapper">
+
+            <a href="{% url 'news' %}" class="news-btn">
+                Toutes les actualités
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="testimonials-section">
+
+    <div class="container">
+
+        <div class="testimonial-title">
+            Ils nous font confiance
+        </div>
+
+    </div>
+
+    <div class="testimonial-background">
+
+        <div class="testimonial-wrapper">
+
+            <div class="green-frame"></div>
+
+            <div class="testimonial-card">
+
+                <div class="testimonial-left">
+
+                    <p id="testimonialText">
+                        Nous travaillons avec ZENER depuis plusieurs années
+                        pour l'approvisionnement de notre flotte de véhicules.
+                        La qualité du service, la disponibilité des produits
+                        et le professionnalisme des équipes répondent parfaitement
+                        à nos attentes.
+                    </p>
+
+                    <div class="testimonial-author">
+
+                        <div class="author-square"></div>
+
+                        <div>
+
+                            <h4 id="testimonialName">
+                                KOMADAN Josué
+                            </h4>
+
+                            <span id="testimonialRole">
+                                CEO JOSUE THE DESIGNER
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="testimonial-arrows">
+
+                        <button onclick="previousTestimonial()">
+                            &#10094;
+                        </button>
+
+                        <button onclick="nextTestimonial()">
+                            &#10095;
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="testimonial-right">
+
+                    <div class="image-frame">
+
+                        <img
+                            id="testimonialImage"
+                            src="{% static 'images/testimonial.jpg' %}"
+                            alt=""
+                        >
+
+                    </div>
+
+                    <div class="slider-dots-vertical">
+
+                        <span class="active"></span>
+                        <span></span>
+                        <span></span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="partners-section">
+
+    <div class="partners-divider">
+
+        <div class="partners-title">
+            Partenaires
+        </div>
+
+    </div>
+
+    <div class="container">
+
+        <div class="partners-grid">
+
+            <img src="{% static 'client/images/partner1.png' %}" alt="">
+            <img src="{% static 'client/images/partner2.png' %}" alt="">
+            <img src="{% static 'client/images/partner3.png' %}" alt="">
+            <img src="{% static 'client/images/partner4.png' %}" alt="">
+            <img src="{% static 'client/images/partner5.png' %}" alt="">
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</div>
+
+{% endblock %}

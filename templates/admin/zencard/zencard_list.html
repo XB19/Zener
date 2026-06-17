@@ -1,0 +1,207 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+
+<style>
+
+.page-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.page-header h1{
+    color:#1b60ad;
+    font-size:32px;
+    font-weight:800;
+}
+
+.page-header p{
+    color:#64748b;
+}
+
+.table-card{
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+thead{
+    background:#1b60ad;
+}
+
+thead th{
+    color:white;
+    padding:18px;
+    text-align:left;
+}
+
+tbody td{
+    padding:18px;
+    border-bottom:1px solid #edf2f7;
+}
+
+tbody tr:hover{
+    background:#f8fafc;
+}
+
+.badge-pending{
+    background:#fff7e6;
+    color:#f59e0b;
+    padding:8px 14px;
+    border-radius:30px;
+    font-size:12px;
+    font-weight:700;
+}
+
+.badge-success{
+    background:#e8f7e2;
+    color:#4b8f1e;
+    padding:8px 14px;
+    border-radius:30px;
+    font-size:12px;
+    font-weight:700;
+}
+
+.badge-danger{
+    background:#ffe8e8;
+    color:#dc2626;
+    padding:8px 14px;
+    border-radius:30px;
+    font-size:12px;
+    font-weight:700;
+}
+
+.btn-view{
+    background:#1b60ad;
+    color:white;
+    padding:8px 14px;
+    border-radius:8px;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:600;
+}
+
+</style>
+
+<div class="page-header">
+
+    <div>
+
+        <h1>
+            Demandes ZenCard
+        </h1>
+
+        <p>
+            Toutes les demandes de création de carte.
+        </p>
+
+    </div>
+
+</div>
+
+<div class="table-card">
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Nom</th>
+                <th>Téléphone</th>
+                <th>Type</th>
+                <th>Station</th>
+                <th>Date</th>
+                <th>Statut</th>
+                <th>Action</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for demande in demandes %}
+
+            <tr>
+
+                <td>{{ demande.nom }}</td>
+
+                <td>{{ demande.telephone }}</td>
+
+                <td>{{ demande.type_demande }}</td>
+
+                <td>{{ demande.station_retrait }}</td>
+
+                <td>
+                    {{ demande.date_creation|date:"d/m/Y H:i" }}
+                </td>
+
+                <td>
+
+                    {% if demande.statut == "en_attente" %}
+
+                        <span class="badge-pending">
+                            En attente
+                        </span>
+
+                    {% elif demande.statut == "validee" %}
+
+                        <span class="badge-success">
+                            Validée
+                        </span>
+
+                    {% else %}
+
+                        <span class="badge-danger">
+                            Rejetée
+                        </span>
+
+                    {% endif %}
+
+                </td>
+
+                <td>
+
+                    <a
+                    href="{% url 'admin_zencard_detail' demande.id %}"
+                    class="btn-view">
+
+                        Voir
+
+                    </a>
+
+                </td>
+
+            </tr>
+
+            {% empty %}
+
+            <tr>
+
+                <td colspan="7"
+                    style="text-align:center;padding:40px;">
+
+                    Aucune demande ZenCard.
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

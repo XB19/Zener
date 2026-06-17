@@ -1,0 +1,279 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+
+<style>
+
+.form-card{
+    background:white;
+    border-radius:20px;
+    padding:35px;
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+
+.form-header{
+    margin-bottom:30px;
+}
+
+.form-header h1{
+    color:#1b60ad;
+    font-size:32px;
+    font-weight:800;
+    margin-bottom:8px;
+}
+
+.form-header p{
+    color:#64748b;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.form-group.full{
+    grid-column:span 2;
+}
+
+.form-group label{
+    margin-bottom:8px;
+    color:#163b68;
+    font-weight:600;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+    padding:15px;
+    border:1px solid #dbe4ef;
+    border-radius:12px;
+    font-size:15px;
+    outline:none;
+    transition:.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+    border-color:#1b60ad;
+    box-shadow:0 0 0 4px rgba(27,96,173,.10);
+}
+
+.form-group textarea{
+    min-height:180px;
+    resize:vertical;
+}
+
+.form-actions{
+    margin-top:30px;
+    display:flex;
+    gap:15px;
+}
+
+.btn-primary{
+    background:#9fc63b;
+    color:white;
+    border:none;
+    padding:15px 30px;
+    border-radius:12px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btn-primary:hover{
+    transform:translateY(-3px);
+}
+
+.btn-secondary{
+    background:#1b60ad;
+    color:white;
+    text-decoration:none;
+    padding:15px 30px;
+    border-radius:12px;
+    font-weight:700;
+}
+
+@media(max-width:768px){
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+        grid-column:auto;
+    }
+
+}
+
+</style>
+
+<div class="form-card">
+
+    <div class="form-header">
+
+        <h1>Nouvelle offre d'emploi</h1>
+
+        <p>
+            Publiez une nouvelle opportunité de recrutement pour ZENER.
+        </p>
+
+    </div>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <div class="form-grid">
+
+            <div class="form-group">
+
+                <label>Titre du poste</label>
+
+                <input
+                    type="text"
+                    name="titre"
+                    required
+                    placeholder="Responsable Commercial"
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Ville</label>
+
+                <input
+                    type="text"
+                    name="ville"
+                    required
+                    placeholder="Lomé"
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Type de contrat</label>
+
+                <select name="type_contrat" required>
+
+                    <option value="">
+                        Sélectionner
+                    </option>
+
+                    <option value="CDI">
+                        CDI
+                    </option>
+
+                    <option value="CDD">
+                        CDD
+                    </option>
+
+                    <option value="Stage">
+                        Stage
+                    </option>
+
+                    <option value="Temps plein">
+                        Temps plein
+                    </option>
+
+                    <option value="Temps partiel">
+                        Temps partiel
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Département</label>
+
+                <input
+                    type="text"
+                    name="departement"
+                    placeholder="Direction Commerciale"
+                >
+
+            </div>
+
+            <div class="form-group full">
+
+                <label>Description du poste</label>
+
+                <textarea
+                    name="description"
+                    required
+                    placeholder="Présentation générale du poste..."
+                ></textarea>
+
+            </div>
+
+            <div class="form-group full">
+
+                <label>Missions</label>
+
+                <textarea
+                    name="missions"
+                    required
+                    placeholder="Liste des missions principales..."
+                ></textarea>
+
+            </div>
+
+            <div class="form-group full">
+
+                <label>Profil recherché</label>
+
+                <textarea
+                    name="profil"
+                    required
+                    placeholder="Compétences, expériences et qualités recherchées..."
+                ></textarea>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Date limite</label>
+
+                <input
+                    type="date"
+                    name="date_limite"
+                >
+
+            </div>
+
+        </div>
+
+        <div class="form-actions">
+
+            <button
+                type="submit"
+                class="btn-primary">
+
+                Publier l'offre
+
+            </button>
+
+            <a href="{% url 'admin_job_list' %}"
+               class="btn-secondary">
+
+                Retour
+
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

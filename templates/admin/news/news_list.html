@@ -1,0 +1,264 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+
+<style>
+
+/* HEADER */
+.page-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.page-header h1{
+    color:#1b60ad;
+    font-size:32px;
+    font-weight:800;
+    margin-bottom:6px;
+}
+
+.page-header p{
+    color:#6b7280;
+}
+
+/* BUTTON */
+.btn-add{
+    background:#9fc63b;
+    color:white;
+    text-decoration:none;
+    padding:12px 18px;
+    border-radius:10px;
+    font-weight:700;
+    transition:.3s;
+}
+
+.btn-add:hover{
+    background:#8db52f;
+}
+
+/* TABLE CARD */
+.table-card{
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+
+/* TABLE */
+.table-card table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.table-card thead{
+    background:#1b60ad;
+}
+
+.table-card thead th{
+    color:white;
+    padding:18px;
+    text-align:left;
+    font-size:14px;
+    font-weight:700;
+}
+
+.table-card tbody tr{
+    border-bottom:1px solid #edf2f7;
+    transition:.3s;
+}
+
+.table-card tbody tr:hover{
+    background:#f8fafc;
+}
+
+.table-card td{
+    padding:18px;
+    font-size:14px;
+    color:#334155;
+}
+
+/* IMAGE */
+.news-img{
+    width:70px;
+    height:50px;
+    object-fit:cover;
+    border-radius:8px;
+}
+
+/* BADGES */
+.badge{
+    display:inline-block;
+    padding:8px 14px;
+    border-radius:30px;
+    font-size:12px;
+    font-weight:700;
+}
+
+.badge-blue{
+    background:rgba(27,96,173,.1);
+    color:#1b60ad;
+}
+
+.badge-green{
+    background:rgba(159,198,59,.15);
+    color:#6b8f1e;
+}
+
+/* ACTIONS */
+.actions{
+    display:flex;
+    gap:10px;
+}
+
+.btn-view{
+    background:#1b60ad;
+    color:white;
+    text-decoration:none;
+    padding:8px 14px;
+    border-radius:8px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.btn-delete{
+    background:#dc2626;
+    color:white;
+    text-decoration:none;
+    padding:8px 14px;
+    border-radius:8px;
+    font-size:13px;
+    font-weight:600;
+}
+
+/* EMPTY */
+.empty-state{
+    text-align:center;
+    padding:60px;
+}
+
+.empty-state i{
+    font-size:60px;
+    color:#cbd5e1;
+    margin-bottom:15px;
+}
+
+.empty-state h3{
+    color:#475569;
+    margin-bottom:10px;
+}
+
+.empty-state p{
+    color:#94a3b8;
+}
+
+</style>
+
+<div class="page-header">
+
+    <div>
+        <h1>Actualités</h1>
+        <p>Gérez les articles et publications affichés sur le site.</p>
+    </div>
+
+    <a href="{% url 'admin_news_create' %}" class="btn-add">
+        + Nouvelle actualité
+    </a>
+
+</div>
+
+<div class="table-card">
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Titre</th>
+                <th>Catégorie</th>
+                <th>Date</th>
+                <th>Statut</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for item in news %}
+
+            <tr>
+
+                <td>
+                    {% if item.image %}
+                        <img src="{{ item.image.url }}" class="news-img">
+                    {% endif %}
+                </td>
+
+                <td>
+                    <strong>{{ item.titre }}</strong>
+                </td>
+
+                <td>
+                    <span class="badge badge-blue">
+                        {{ item.categorie }}
+                    </span>
+                </td>
+
+                <td>
+                    {{ item.created_at|date:"d/m/Y" }}
+                </td>
+
+                <td>
+                    {% if item.actif %}
+                        <span class="badge badge-green">Actif</span>
+                    {% else %}
+                        <span class="badge">Inactif</span>
+                    {% endif %}
+                </td>
+
+                <td>
+
+                    <div class="actions">
+
+        <a href="{% url 'admin_news_detail' item.id %}" class="btn-view">
+            Voir
+        </a>
+
+        <a href="{% url 'admin_news_delete' item.id %}"
+           class="btn-delete"
+           onclick="return confirm('Supprimer cette actualité ?')">
+            Supprimer
+        </a>
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+            {% empty %}
+
+            <tr>
+                <td colspan="6">
+                    <div class="empty-state">
+
+                        <i class="fa-solid fa-newspaper"></i>
+
+                        <h3>Aucune actualité</h3>
+
+                        <p>Créez votre première actualité pour l’afficher sur le site.</p>
+
+                    </div>
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

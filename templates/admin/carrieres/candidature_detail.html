@@ -1,0 +1,376 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+
+<style>
+
+.page-header{
+    margin-bottom:30px;
+}
+
+.page-header h1{
+    color:#1b60ad;
+    font-size:32px;
+    font-weight:800;
+    margin-bottom:8px;
+}
+
+.page-header p{
+    color:#64748b;
+}
+
+/* ==========================
+   LAYOUT
+========================== */
+
+.candidature-layout{
+    display:grid;
+    grid-template-columns:350px 1fr;
+    gap:30px;
+}
+
+/* ==========================
+   SIDEBAR
+========================== */
+
+.profile-card{
+    background:white;
+    border-radius:20px;
+    padding:35px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+
+.profile-avatar{
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    margin:auto;
+
+    background:#1b60ad;
+    color:white;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:34px;
+    font-weight:800;
+
+    margin-bottom:20px;
+}
+
+.profile-name{
+    font-size:24px;
+    font-weight:800;
+    color:#1b60ad;
+    margin-bottom:8px;
+}
+
+.profile-job{
+    color:#64748b;
+    margin-bottom:25px;
+}
+
+.status-badge{
+    display:inline-block;
+    background:rgba(159,198,59,.15);
+    color:#7ca321;
+    padding:10px 18px;
+    border-radius:30px;
+    font-weight:700;
+    font-size:13px;
+}
+
+/* ==========================
+   MAIN CARD
+========================== */
+
+.detail-card{
+    background:white;
+    border-radius:20px;
+    padding:35px;
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+
+.section-title{
+    color:#1b60ad;
+    font-size:20px;
+    font-weight:800;
+    margin-bottom:25px;
+}
+
+/* ==========================
+   INFOS
+========================== */
+
+.info-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+    margin-bottom:35px;
+}
+
+.info-box{
+    background:#f8fafc;
+    border-radius:12px;
+    padding:18px;
+}
+
+.info-label{
+    display:block;
+    color:#64748b;
+    font-size:13px;
+    margin-bottom:6px;
+}
+
+.info-value{
+    font-weight:700;
+    color:#334155;
+}
+
+/* ==========================
+   MESSAGE
+========================== */
+
+.message-box{
+    background:#f8fafc;
+    border-radius:15px;
+    padding:25px;
+    line-height:1.8;
+    color:#475569;
+}
+
+/* ==========================
+   DOCUMENTS
+========================== */
+
+.documents{
+    margin-top:35px;
+}
+
+.document-actions{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.btn-download{
+    text-decoration:none;
+    background:#1b60ad;
+    color:white;
+    padding:14px 22px;
+    border-radius:10px;
+    font-weight:700;
+    transition:.3s;
+}
+
+.btn-download:hover{
+    transform:translateY(-2px);
+}
+
+.btn-secondary{
+    text-decoration:none;
+    background:#9fc63b;
+    color:white;
+    padding:14px 22px;
+    border-radius:10px;
+    font-weight:700;
+    transition:.3s;
+}
+
+.btn-secondary:hover{
+    transform:translateY(-2px);
+}
+
+/* ==========================
+   BACK BUTTON
+========================== */
+
+.back-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+
+    text-decoration:none;
+
+    color:#1b60ad;
+    font-weight:700;
+
+    margin-bottom:25px;
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:992px){
+
+    .candidature-layout{
+        grid-template-columns:1fr;
+    }
+
+    .info-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+
+<a href="{% url 'admin_candidatures_list' %}"
+   class="back-btn">
+
+    ← Retour aux candidatures
+
+</a>
+
+<div class="page-header">
+
+    <h1>
+        Détail de la candidature
+    </h1>
+
+    <p>
+        Consultation complète du dossier candidat.
+    </p>
+
+</div>
+
+<div class="candidature-layout">
+
+    <!-- SIDEBAR -->
+
+    <div class="profile-card">
+
+        <div class="profile-avatar">
+            {{ candidature.nom|slice:":1"|upper }}
+        </div>
+
+        <div class="profile-name">
+            {{ candidature.nom }}
+        </div>
+
+        <div class="profile-job">
+
+            {% if candidature.poste %}
+                {{ candidature.poste }}
+            {% else %}
+                Candidature spontanée
+            {% endif %}
+
+        </div>
+
+        <span class="status-badge">
+            Nouvelle candidature
+        </span>
+
+    </div>
+
+    <!-- CONTENU -->
+
+    <div class="detail-card">
+
+        <h2 class="section-title">
+            Informations personnelles
+        </h2>
+
+        <div class="info-grid">
+
+            <div class="info-box">
+
+                <span class="info-label">
+                    Adresse email
+                </span>
+
+                <div class="info-value">
+                    {{ candidature.email }}
+                </div>
+
+            </div>
+
+            <div class="info-box">
+
+                <span class="info-label">
+                    Téléphone
+                </span>
+
+                <div class="info-value">
+                    {{ candidature.telephone }}
+                </div>
+
+            </div>
+
+            <div class="info-box">
+
+                <span class="info-label">
+                    Poste recherché
+                </span>
+
+                <div class="info-value">
+                    {{ candidature.poste }}
+                </div>
+
+            </div>
+
+            <div class="info-box">
+
+                <span class="info-label">
+                    Date de candidature
+                </span>
+
+                <div class="info-value">
+                    {{ candidature.date_creation|date:"d/m/Y H:i" }}
+                </div>
+
+            </div>
+
+        </div>
+
+        <h2 class="section-title">
+            Motivation du candidat
+        </h2>
+
+        <div class="message-box">
+
+            {{ candidature.message|linebreaks }}
+
+        </div>
+
+        <div class="documents">
+
+            <h2 class="section-title">
+                Documents joints
+            </h2>
+
+            <div class="document-actions">
+
+                <a href="{{ candidature.cv.url }}"
+                   target="_blank"
+                   class="btn-download">
+
+                    📄 Télécharger le CV
+
+                </a>
+
+                {% if candidature.lettre_motivation %}
+
+                <a href="{{ candidature.lettre_motivation.url }}"
+                   target="_blank"
+                   class="btn-secondary">
+
+                    📝 Lettre de motivation
+
+                </a>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

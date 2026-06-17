@@ -1,0 +1,239 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+
+<style>
+
+.detail-card{
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+
+.detail-card h1{
+    color:#1b60ad;
+    margin-bottom:25px;
+}
+
+.info-row{
+    margin-bottom:18px;
+}
+
+.label{
+    font-weight:700;
+    color:#1b60ad;
+}
+
+/* IMAGE CNI */
+.cni-image{
+    width:280px;
+    border-radius:12px;
+    margin-top:10px;
+    border:1px solid #ddd;
+}
+
+/* STATUS BADGE */
+.status-badge{
+    display:inline-block;
+    padding:8px 14px;
+    border-radius:30px;
+    font-weight:700;
+    font-size:13px;
+}
+
+.status-pending{
+    background:#fff7e6;
+    color:#f59e0b;
+}
+
+.status-approved{
+    background:#e8f7e2;
+    color:#4b8f1e;
+}
+
+.status-rejected{
+    background:#ffe8e8;
+    color:#dc2626;
+}
+
+/* ACTION BUTTONS */
+.actions{
+    margin-top:30px;
+    display:flex;
+    gap:15px;
+}
+
+.btn{
+    border:none;
+    padding:12px 22px;
+    border-radius:10px;
+    cursor:pointer;
+    color:white;
+    font-weight:600;
+    transition:.2s;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+.btn-success{
+    background:#4b8f1e;
+}
+
+.btn-danger{
+    background:#dc2626;
+}
+
+.disabled-box{
+    margin-top:25px;
+    padding:15px;
+    background:#f8fafc;
+    border-left:4px solid #1b60ad;
+    color:#64748b;
+    border-radius:8px;
+}
+
+.section{
+    margin-top:25px;
+}
+
+.btn-back{
+    display:inline-block;
+    margin-top:10px;
+    text-decoration:none;
+
+    background:#1b60ad;
+    color:white;
+
+    padding:12px 20px;
+    border-radius:10px;
+
+    font-weight:600;
+    transition:.2s;
+}
+
+.btn-back:hover{
+    background:#144a86;
+    transform:translateY(-2px);
+}
+
+</style>
+
+<div class="detail-card">
+
+    <h1>Détails de la demande ZenCard</h1>
+
+    <!-- INFOS -->
+    <div class="section">
+
+        <div class="info-row">
+            <span class="label">Nom :</span> {{ demande.nom }}
+        </div>
+
+        <div class="info-row">
+            <span class="label">Téléphone :</span> {{ demande.telephone }}
+        </div>
+
+        <div class="info-row">
+            <span class="label">Email :</span> {{ demande.email }}
+        </div>
+
+        <div class="info-row">
+            <span class="label">Ville :</span> {{ demande.ville }}
+        </div>
+
+        <div class="info-row">
+            <span class="label">Type :</span> {{ demande.type_demande }}
+        </div>
+
+        <div class="info-row">
+            <span class="label">Station de retrait :</span> {{ demande.station_retrait }}
+        </div>
+
+    </div>
+
+    <!-- CNI -->
+    <div class="section">
+
+        <div class="info-row">
+            <span class="label">Pièce d'identité :</span><br>
+
+            <img src="{{ demande.cni.url }}" class="cni-image">
+        </div>
+
+    </div>
+
+    <!-- STATUT -->
+    <div class="section">
+
+        <span class="label">Statut :</span>
+
+        {% if demande.statut == "en_attente" %}
+
+            <span class="status-badge status-pending">
+                En attente
+            </span>
+
+        {% elif demande.statut == "validee" %}
+
+            <span class="status-badge status-approved">
+                Validée
+            </span>
+
+        {% elif demande.statut == "rejetee" %}
+
+            <span class="status-badge status-rejected">
+                Rejetée
+            </span>
+
+        {% endif %}
+
+    </div>
+
+    <!-- ACTIONS -->
+    {% if demande.statut == "en_attente" %}
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="actions">
+
+                <button type="submit" name="action" value="valider" class="btn btn-success">
+                    Valider la demande
+                </button>
+
+                <button type="submit" name="action" value="rejeter" class="btn btn-danger">
+                    Rejeter la demande
+                </button>
+
+            </div>
+
+        </form>
+
+    {% else %}
+
+        <div class="disabled-box">
+            Cette demande a déjà été traitée.
+        </div>
+
+    {% endif %}
+
+    <div style="margin-top:35px; display:flex; gap:15px;">
+
+    <a href="{% url 'admin_zencard_list' %}" class="btn-back">
+        ← Retour à la liste
+    </a>
+
+    {% if demande.statut != "en_attente" %}
+        <span style="color:#64748b; display:flex; align-items:center;">
+            ✔ Demande traitée
+        </span>
+    {% endif %}
+
+</div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,452 @@
+{% extends 'clients/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+
+/* ==========================
+   HERO
+========================== */
+
+.shop-hero{
+    position:relative;
+    height:500px;
+
+    background: url("{% static 'images/about-hero.png' %}");
+    center center/cover no-repeat;
+}
+
+.shop-overlay{
+    position:absolute;
+    inset:0;
+    background:rgba(27,96,173,.80);
+}
+
+.shop-hero-content{
+    position:relative;
+    z-index:2;
+
+    color:white;
+
+    max-width:700px;
+
+    padding-top:100px;
+}
+
+.shop-badge{
+    display:inline-block;
+
+    background:#9fc63b;
+
+    padding:10px 22px;
+
+    font-weight:600;
+}
+
+.shop-hero-content h1{
+    font-size:60px;
+    font-weight:800;
+
+    margin:25px 0;
+}
+
+.shop-hero-content p{
+    font-size:18px;
+    line-height:1.8;
+}
+
+/* ==========================
+   INTRO
+========================== */
+
+.shop-intro{
+    padding:100px 0;
+    text-align:center;
+}
+
+.shop-intro h2{
+    font-size:42px;
+    margin-bottom:20px;
+}
+
+.shop-intro p{
+    max-width:800px;
+    margin:auto;
+    line-height:1.8;
+}
+
+/* ==========================
+   CATEGORIES
+========================== */
+
+.shop-categories{
+    padding-bottom:100px;
+}
+
+.category-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+}
+
+.category-card{
+    background:white;
+
+    padding:40px;
+
+    text-align:center;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    transition:.3s;
+}
+
+.category-card:hover{
+    transform:translateY(-10px);
+}
+
+.category-card h3{
+    color:#2f7ecb;
+}
+
+/* ==========================
+   PRODUITS
+========================== */
+
+.featured-products{
+    background:#f6f8fb;
+    padding:100px 0;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:60px;
+}
+
+.products-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+}
+
+.product-card{
+    background:white;
+
+    overflow:hidden;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.product-card img{
+    width:100%;
+    height:260px;
+    object-fit:cover;
+}
+
+.product-content{
+    padding:25px;
+}
+
+.product-content h3{
+    margin-bottom:10px;
+}
+
+.price{
+    color:#9fc63b;
+    font-size:24px;
+    font-weight:700;
+}
+
+.shop-btn{
+    display:inline-flex;
+
+    justify-content:center;
+    align-items:center;
+
+    width:180px;
+    height:50px;
+
+    margin-top:15px;
+
+    border-radius:40px;
+
+    background:#2f7ecb;
+    color:white;
+
+    text-decoration:none;
+}
+
+/* ==========================
+   CTA
+========================== */
+
+.shop-cta{
+    background:#2f7ecb;
+
+    color:white;
+
+    text-align:center;
+
+    padding:100px 0;
+}
+
+.shop-cta h2{
+    font-size:48px;
+    margin-bottom:20px;
+}
+
+.cta-btn{
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    width:240px;
+    height:60px;
+
+    margin-top:25px;
+
+    border-radius:50px;
+
+    background:#9fc63b;
+
+    color:white;
+
+    text-decoration:none;
+
+    font-weight:600;
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:992px){
+
+    .category-grid,
+    .products-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:768px){
+
+    .shop-hero-content h1{
+        font-size:42px;
+    }
+
+    .category-grid,
+    .products-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+
+<!-- HERO -->
+
+<section class="shop-hero">
+
+    <div class="shop-overlay"></div>
+
+    <div class="container">
+
+        <div class="shop-hero-content">
+
+            <span class="shop-badge">
+                BOUTIQUE ZENER
+            </span>
+
+            <h1>
+                Découvrez notre espace boutique
+            </h1>
+
+            <p>
+                Retrouvez une sélection de produits, équipements
+                et accessoires proposés par ZENER.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- INTRO -->
+
+<section class="shop-intro">
+
+    <div class="container">
+
+        <h2>
+            Une boutique pensée pour vous
+        </h2>
+
+        <p>
+            Notre boutique vous permet d'accéder rapidement
+            à nos produits et services avec la qualité
+            et la fiabilité qui caractérisent ZENER.
+        </p>
+
+    </div>
+
+</section>
+
+<!-- CATEGORIES -->
+
+<section class="shop-categories">
+
+    <div class="container">
+
+        <div class="category-grid">
+
+            <div class="category-card">
+                <h3>Lubrifiants</h3>
+            </div>
+
+            <div class="category-card">
+                <h3>Gaz domestique</h3>
+            </div>
+
+            <div class="category-card">
+                <h3>Accessoires</h3>
+            </div>
+
+            <div class="category-card">
+                <h3>Équipements</h3>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- PRODUITS -->
+
+<section class="featured-products">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>
+                Produits vedettes
+            </h2>
+
+        </div>
+
+        <div class="products-grid">
+
+            <article class="product-card">
+
+                <img src="{% static 'images/product1.jpg' %}" alt="">
+
+                <div class="product-content">
+
+                    <h3>Lubrifiant Premium</h3>
+
+                    <div class="price">
+                        34 875 FCFA
+                    </div>
+
+                    <a href="#" class="shop-btn">
+                        Voir le produit
+                    </a>
+
+                </div>
+
+            </article>
+
+            <article class="product-card">
+
+                <img src="{% static 'images/product2.jpg' %}" alt="">
+
+                <div class="product-content">
+
+                    <h3>Huile moteur</h3>
+
+                    <div class="price">
+                        34 875 FCFA
+                    </div>
+
+                    <a href="#" class="shop-btn">
+                        Voir le produit
+                    </a>
+
+                </div>
+
+            </article>
+
+            <article class="product-card">
+
+                <img src="{% static 'images/product3.jpg' %}" alt="">
+
+                <div class="product-content">
+
+                    <h3>Accessoire Auto</h3>
+
+                    <div class="price">
+                        34 875 FCFA
+                    </div>
+
+                    <a href="#" class="shop-btn">
+                        Voir le produit
+                    </a>
+
+                </div>
+
+            </article>
+
+            <article class="product-card">
+
+                <img src="{% static 'images/product4.jpg' %}" alt="">
+
+                <div class="product-content">
+
+                    <h3>Produit ZENER</h3>
+
+                    <div class="price">
+                        34 875 FCFA
+                    </div>
+
+                    <a href="#" class="shop-btn">
+                        Voir le produit
+                    </a>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CTA -->
+
+<section class="shop-cta">
+
+    <div class="container">
+
+        <h2>
+            Besoin d'informations ?
+        </h2>
+
+        <p>
+            Nos équipes sont à votre disposition pour vous conseiller.
+        </p>
+
+        <a href="{% url 'contact' %}" class="cta-btn">
+            Nous contacter
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

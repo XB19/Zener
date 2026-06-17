@@ -1,0 +1,417 @@
+{% load static %}
+
+<style>
+/* ======================================
+   HEADER ZENER PREMIUM
+====================================== */
+
+.main-header{
+
+    position:sticky;
+    top:0;
+    left:0;
+
+    width:100%;
+
+    height:100px;
+
+    background:#fff;
+
+    z-index:9999;
+
+    border-bottom:1px solid rgba(0,0,0,.05);
+
+    box-shadow:
+    0 4px 20px rgba(0,0,0,.04);
+}
+
+/* =====================
+   CONTAINER
+===================== */
+
+.header-container{
+
+    max-width:1380px;
+    height:100%;
+
+    margin:0 auto;
+
+    padding:0 40px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+/* =====================
+   LOGO
+===================== */
+
+.logo{
+
+    flex-shrink:0;
+
+    display:flex;
+    align-items:center;
+}
+
+.logo img{
+
+    height:92px;
+    width:auto;
+
+    display:block;
+
+    transition:.3s;
+}
+
+.logo:hover img{
+
+    transform:scale(1.03);
+}
+
+/* =====================
+   MENU
+===================== */
+
+.nav-menu{
+
+    flex:1;
+
+    display:flex;
+    justify-content:center;
+}
+
+
+.nav-links{
+
+    list-style:none;
+    display:flex;
+    align-items:center;
+    gap:65px;
+    margin:0;
+    padding:0;
+
+}
+
+.nav-links li{
+    position:relative;
+}
+
+.nav-links a{
+
+    position:relative;
+    display:flex;
+    align-items:center;
+    height:100px;
+
+    text-decoration:none;
+
+    color:#1c1c1c;
+    font-size:18px;
+    font-weight:500;
+
+    transition:.3s ease;
+
+}
+
+/* Hover */
+.nav-links a:hover{
+    color:#2f7ecb;
+}
+
+/* underline animation */
+.nav-links a::after{
+
+    content:"";
+    position:absolute;
+
+    left:50%;
+    bottom:22px;
+
+    width:0;
+    height:3px;
+
+    background:#9BC53D;
+
+    border-radius:50px;
+
+    transform:translateX(-50%);
+    transition:width .35s ease;
+
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after{
+    width:100%;
+}
+
+.nav-links a.active{
+    color:#2f7ecb;
+    font-weight:600;
+}
+
+
+
+
+/* =====================
+   ACTIONS
+===================== */
+
+.header-actions{
+
+    display:flex;
+    align-items:center;
+
+    gap:32px;
+}
+
+/* CART */
+
+.cart-btn{
+
+    position:relative;
+
+    width:46px;
+    height:46px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-decoration:none;
+
+    color:#1f1f1f;
+
+    border-radius:50%;
+
+    transition:.3s;
+}
+
+.cart-btn:hover{
+
+    background:#f5f7fa;
+}
+
+.cart-btn svg{
+
+    width:28px;
+    height:28px;
+}
+
+.cart-count{
+
+    position:absolute;
+
+    top:2px;
+    right:0;
+
+    width:20px;
+    height:20px;
+
+    border-radius:50%;
+
+    background:#9BC53D;
+    color:#fff;
+
+    font-size:11px;
+    font-weight:700;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+/* =====================
+   BOUTON CONTACT
+===================== */
+
+.contact-btn{
+
+    min-width:220px;
+    height:56px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-decoration:none;
+
+    background:#9BC53D;
+    color:#fff;
+
+    border-radius:6px;
+
+    font-size:17px;
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.contact-btn:hover{
+
+    background:#87b02f;
+
+    color:#fff;
+
+    transform:translateY(-2px);
+}
+
+/* =====================
+   TABLETTE
+===================== */
+
+@media(max-width:991px){
+
+    .main-header{
+
+        height:85px;
+    }
+
+    .logo img{
+
+        height:70px;
+    }
+
+    .nav-menu{
+
+        display:none;
+    }
+
+    .header-container{
+
+        padding:0 20px;
+    }
+
+    .contact-btn{
+
+        min-width:180px;
+        height:50px;
+
+        font-size:15px;
+    }
+}
+
+/* =====================
+   MOBILE
+===================== */
+
+@media(max-width:576px){
+
+    .contact-btn{
+
+        min-width:150px;
+
+        font-size:14px;
+    }
+
+    .header-actions{
+
+        gap:15px;
+    }
+
+    .cart-btn{
+
+        width:40px;
+        height:40px;
+    }
+}
+</style>
+
+<header class="main-header">
+
+    <div class="header-container">
+
+        <!-- Logo -->
+        <a href="{% url 'home' %}" class="logo">
+
+            <img
+                src="{% static 'images/logo.png' %}"
+                alt="ZENER">
+
+        </a>
+
+        <nav class="nav-menu">
+
+    <ul class="nav-links">
+
+        <li>
+            <a href="{% url 'home' %}"
+               class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+                Accueil
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'about' %}"
+               class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">
+                À propos
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'services' %}"
+               class="{% if request.resolver_match.url_name == 'services' %}active{% endif %}">
+                Services
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'news' %}"
+               class="{% if request.resolver_match.url_name == 'news' %}active{% endif %}">
+                Actualités
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'carrieres' %}"
+               class="{% if request.resolver_match.url_name == 'carrieres' %}active{% endif %}">
+                carrieres
+            </a>
+        </li>
+
+                <li>
+            <a href="{% url 'bon_plan' %}"
+               class="{% if request.resolver_match.url_name == 'bon_plan' %}active{% endif %}">
+                Bon plan
+            </a>
+        </li>
+
+    </ul>
+
+</nav>
+
+        <!-- Actions -->
+
+        <div class="header-actions">
+
+            <a href="{% url 'boutique' %}" class="cart-btn">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8">
+
+                    <path d="M6 2L3 6V20H21V6L18 2H6Z"></path>
+                    <path d="M3 6H21"></path>
+                    <path d="M16 10C16 12.2 14.2 14 12 14C9.8 14 8 12.2 8 10"></path>
+
+                </svg>
+
+                <span class="cart-count">
+                    0
+                </span>
+
+            </a>
+
+            <a href="{% url 'contact' %}" class="contact-btn">
+                Nous contacter
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+

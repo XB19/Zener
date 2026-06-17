@@ -1,0 +1,632 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+
+<style>
+
+.dashboard-page{
+    padding:35px;
+    background:#f5f8fb;
+    min-height:100vh;
+}
+
+/* =======================
+HEADER
+======================= */
+
+.dashboard-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:35px;
+}
+
+.dashboard-title h1{
+    font-size:34px;
+    font-weight:800;
+    color:#1b60ad;
+    margin-bottom:8px;
+}
+
+.dashboard-title p{
+    color:#6b7280;
+    font-size:15px;
+}
+
+.dashboard-date{
+    background:white;
+    padding:14px 22px;
+    border-radius:12px;
+    box-shadow:0 5px 20px rgba(0,0,0,.06);
+    font-weight:600;
+    color:#1b60ad;
+}
+
+/* =======================
+STATS
+======================= */
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+    margin-bottom:35px;
+}
+
+.stat-card{
+    position:relative;
+    background:white;
+    border-radius:18px;
+    padding:28px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+    transition:.3s;
+}
+
+.stat-card:hover{
+    transform:translateY(-8px);
+}
+
+.stat-card::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:5px;
+}
+
+.stat-card.blue::before{
+    background:#1b60ad;
+}
+
+.stat-card.green::before{
+    background:#9fc63b;
+}
+
+.stat-card.light::before{
+    background:#2f7ecb;
+}
+
+.stat-card.orange::before{
+    background:#4aa3ff;
+}
+
+.stat-icon{
+    width:60px;
+    height:60px;
+    border-radius:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    margin-bottom:18px;
+}
+
+.blue .stat-icon{
+    background:rgba(27,96,173,.12);
+}
+
+.green .stat-icon{
+    background:rgba(159,198,59,.15);
+}
+
+.light .stat-icon{
+    background:rgba(47,126,203,.12);
+}
+
+.orange .stat-icon{
+    background:rgba(74,163,255,.12);
+}
+
+.stat-card h3{
+    font-size:15px;
+    color:#6b7280;
+    margin-bottom:10px;
+}
+
+.stat-number{
+    font-size:42px;
+    font-weight:800;
+    color:#1b60ad;
+}
+
+/* =======================
+GRID
+======================= */
+
+.dashboard-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:25px;
+}
+
+/* =======================
+ACTIVITES
+======================= */
+
+.dashboard-box{
+    background:white;
+    border-radius:18px;
+    padding:28px;
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+
+.box-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.box-title h2{
+    color:#1b60ad;
+    font-size:22px;
+}
+
+.activity-list{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.activity-item{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:15px;
+    border-radius:12px;
+    background:#f8fafc;
+}
+
+.activity-icon{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    background:#9fc63b;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+    font-weight:700;
+}
+
+.activity-text h4{
+    color:#163b68;
+    font-size:15px;
+    margin-bottom:4px;
+}
+
+.activity-text p{
+    color:#6b7280;
+    font-size:13px;
+}
+
+/* =======================
+RACCOURCIS
+======================= */
+
+.quick-links{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.quick-btn{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:16px;
+    border-radius:14px;
+    background:#f8fafc;
+    text-decoration:none;
+    color:#163b68;
+    font-weight:600;
+    transition:.3s;
+}
+
+.quick-btn:hover{
+    background:#1b60ad;
+    color:white;
+}
+
+.quick-btn span{
+    font-size:20px;
+}
+
+/* =======================
+BOTTOM
+======================= */
+
+.bottom-grid{
+    margin-top:25px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+}
+
+.mini-box{
+    background:white;
+    border-radius:18px;
+    padding:28px;
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+
+.mini-box h3{
+    color:#1b60ad;
+    margin-bottom:20px;
+}
+
+.progress-item{
+    margin-bottom:18px;
+}
+
+.progress-item span{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:8px;
+    font-size:14px;
+}
+
+.progress{
+    height:8px;
+    background:#e5edf8;
+    border-radius:50px;
+}
+
+.progress-bar{
+    height:100%;
+    border-radius:50px;
+    background:#9fc63b;
+}
+
+/* =======================
+RESPONSIVE
+======================= */
+
+@media(max-width:1200px){
+
+    .stats-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .dashboard-grid{
+        grid-template-columns:1fr;
+    }
+
+    .bottom-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:768px){
+
+    .dashboard-page{
+        padding:20px;
+    }
+
+    .dashboard-header{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
+    }
+
+    .stats-grid{
+        grid-template-columns:1fr;
+    }
+
+    .dashboard-title h1{
+        font-size:28px;
+    }
+}
+
+
+
+</style>
+
+<div class="dashboard-page">
+
+    <div class="dashboard-header">
+
+        <div class="dashboard-title">
+            <h1>Tableau de bord</h1>
+            <p>Bienvenue dans l'administration ZENER</p>
+        </div>
+
+        <div class="dashboard-date">
+            <i class="ri-calendar-line"></i>
+            {{ today|default:"08 Juin 2026" }}
+        </div>
+
+    </div>
+
+    <!-- STATS -->
+
+    <div class="stats-grid">
+
+        <div class="stat-card blue">
+
+            <div class="stat-icon">
+                <i class="ri-briefcase-4-line"></i>
+            </div>
+
+            <h3>Offres d'emploi</h3>
+
+            <div class="stat-number">
+                {{ offres_count|default:"12" }}
+            </div>
+
+        </div>
+
+        <div class="stat-card green">
+
+            <div class="stat-icon">
+                <i class="ri-file-user-line"></i>
+            </div>
+
+            <h3>Candidatures</h3>
+
+            <div class="stat-number">
+                {{ candidatures_count|default:"84" }}
+            </div>
+
+        </div>
+
+        <div class="stat-card light">
+
+            <div class="stat-icon">
+                <i class="ri-gas-station-line"></i>
+            </div>
+
+            <h3>Stations</h3>
+
+            <div class="stat-number">
+                {{ stations_count|default:"25" }}
+            </div>
+
+        </div>
+
+        <div class="stat-card orange">
+
+            <div class="stat-icon">
+                <i class="ri-mail-line"></i>
+            </div>
+
+            <h3>Messages</h3>
+
+            <div class="stat-number">
+                {{ contacts_count|default:"16" }}
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- GRID -->
+
+    <div class="dashboard-grid">
+
+        <div class="dashboard-box">
+
+            <div class="box-title">
+
+                <h2>
+                    <i class="ri-pulse-line"></i>
+                    Activités récentes
+                </h2>
+
+            </div>
+
+<div class="activity-list">
+
+    {% for candidature in dernieres_candidatures %}
+
+    <div class="activity-item">
+
+        <div class="activity-icon">
+            <i class="ri-file-user-line"></i>
+        </div>
+
+        <div class="activity-text">
+
+            <h4>
+                Nouvelle candidature reçue
+            </h4>
+
+            <p>
+
+                {{ candidature.nom }}
+
+                {% if candidature.offre %}
+                    • {{ candidature.offre.titre }}
+                {% endif %}
+
+            </p>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+    {% for message in derniers_messages|slice:":2" %}
+
+    <div class="activity-item">
+
+        <div class="activity-icon">
+            <i class="ri-mail-line"></i>
+        </div>
+
+        <div class="activity-text">
+
+            <h4>
+                Nouveau message contact
+            </h4>
+
+            <p>
+                {{ message.nom }}
+            </p>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+        </div>
+
+        <!-- QUICK LINKS -->
+
+        <div class="dashboard-box">
+
+            <div class="box-title">
+
+                <h2>
+                    <i class="ri-flashlight-line"></i>
+                    Accès rapide
+                </h2>
+
+            </div>
+
+<div class="quick-links">
+
+    <a href="{% url 'admin_job_create' %}"
+       class="quick-btn">
+
+        <i class="ri-add-circle-line"></i>
+
+        Ajouter une offre
+
+    </a>
+
+    <a href="{% url 'admin_job_list' %}"
+       class="quick-btn">
+
+        <i class="ri-briefcase-4-line"></i>
+
+        Gérer les offres
+
+    </a>
+
+    <a href="{% url 'admin_candidatures_list' %}"
+       class="quick-btn">
+
+        <i class="ri-team-line"></i>
+
+        Voir les candidatures
+
+    </a>
+
+    <a href="{% url 'admin_contact_list' %}"
+       class="quick-btn">
+
+        <i class="ri-mail-line"></i>
+
+        Messages reçus
+
+    </a>
+
+</div>
+
+        </div>
+
+    </div>
+
+    <!-- BAS -->
+
+    <div class="bottom-grid">
+
+        <div class="mini-box">
+
+            <h3>
+                <i class="ri-bar-chart-box-line"></i>
+                Statistiques RH
+            </h3>
+
+            <div class="progress-item">
+
+                <span>
+
+                    <strong>
+                        Candidatures traitées
+                    </strong>
+
+<strong>
+    {{ pourcentage_candidatures }}%
+</strong>
+
+                </span>
+
+                <div class="progress">
+                    <div class="progress-bar"
+     style="width:{{ pourcentage_candidatures }}%;">
+</div>
+                </div>
+
+            </div>
+
+            <div class="progress-item">
+
+                <span>
+
+                    <strong>
+                        Offres actives
+                    </strong>
+
+                    <strong>
+                        {{ pourcentage_offres }}%
+                    </strong>
+
+                </span>
+
+                <div class="progress">
+                    <div class="progress-bar"
+     style="width:{{ pourcentage_offres }}%;">
+</div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="mini-box">
+
+            <h3>
+                <i class="ri-building-4-line"></i>
+                ZENER en chiffres
+            </h3>
+
+            <ul class="dashboard-list">
+
+                <li>
+                    <i class="ri-checkbox-circle-fill"></i>
+                    25 stations-services
+                </li>
+
+                <li>
+                    <i class="ri-checkbox-circle-fill"></i>
+                    Présence nationale
+                </li>
+
+                <li>
+                    <i class="ri-checkbox-circle-fill"></i>
+                    Réseau énergétique en croissance
+                </li>
+
+                <li>
+                    <i class="ri-checkbox-circle-fill"></i>
+                    Service client de proximité
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

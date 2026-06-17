@@ -1,0 +1,352 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+
+<style>
+
+.page-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.page-header h1{
+    color:#1b60ad;
+    font-size:32px;
+    font-weight:800;
+    margin-bottom:6px;
+}
+
+.page-header p{
+    color:#6b7280;
+}
+
+/* CARD */
+
+.table-card{
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+
+/* TABLE */
+
+.table-card table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.table-card thead{
+    background:#1b60ad;
+}
+
+.table-card thead th{
+    color:white;
+    padding:18px;
+    text-align:left;
+    font-size:14px;
+    font-weight:700;
+}
+
+.table-card tbody tr{
+    border-bottom:1px solid #edf2f7;
+    transition:.3s;
+}
+
+.table-card tbody tr:hover{
+    background:#f8fafc;
+}
+
+.table-card td{
+    padding:18px;
+    color:#334155;
+    font-size:14px;
+}
+
+/* CANDIDAT */
+
+.candidat{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.avatar{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:#1b60ad;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+    font-size:14px;
+}
+
+/* EMAIL */
+
+.email{
+    color:#1b60ad;
+    font-weight:600;
+}
+
+/* DATE */
+
+.date{
+    color:#64748b;
+    font-size:13px;
+}
+
+/* BOUTONS */
+
+.actions{
+    display:flex;
+    gap:10px;
+}
+
+.btn-view{
+    background:#1b60ad;
+    color:white;
+    text-decoration:none;
+    padding:8px 14px;
+    border-radius:8px;
+    font-size:13px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.btn-view:hover{
+    background:#174f8f;
+}
+
+.btn-cv{
+    background:#9fc63b;
+    color:white;
+    text-decoration:none;
+    padding:8px 14px;
+    border-radius:8px;
+    font-size:13px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.btn-cv:hover{
+    background:#8db52f;
+}
+
+/* BADGE */
+
+.badge-job{
+    display:inline-block;
+    background:rgba(27,96,173,.10);
+    color:#1b60ad;
+    padding:8px 14px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:700;
+}
+
+/* EMPTY */
+
+.empty-state{
+    text-align:center;
+    padding:60px;
+}
+
+.empty-state i{
+    font-size:60px;
+    color:#cbd5e1;
+    margin-bottom:15px;
+}
+
+.empty-state h3{
+    color:#475569;
+    margin-bottom:10px;
+}
+
+.empty-state p{
+    color:#94a3b8;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:992px){
+
+    .table-card{
+        overflow-x:auto;
+    }
+
+    table{
+        min-width:1000px;
+    }
+
+}
+
+</style>
+
+<div class="page-header">
+
+    <div>
+
+        <h1>
+            Candidatures reçues
+        </h1>
+
+        <p>
+            Consultez toutes les candidatures envoyées depuis le site ZENER.
+        </p>
+
+    </div>
+
+</div>
+
+<div class="table-card">
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Candidat</th>
+                <th>Email</th>
+                <th>Téléphone</th>
+                <th>Offre</th>
+                <th>Date</th>
+                <th>Actions</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for candidature in candidatures %}
+
+            <tr>
+
+                <td>
+
+                    <div class="candidat">
+
+                        <div class="avatar">
+                            {{ candidature.nom|slice:":1"|upper }}
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                {{ candidature.nom }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </td>
+
+                <td>
+
+                    <span class="email">
+                        {{ candidature.email }}
+                    </span>
+
+                </td>
+
+                <td>
+
+                    {{ candidature.telephone }}
+
+                </td>
+
+                <td>
+
+                    <span class="badge-job">
+
+                        {% if candidature.offre %}
+                            {{ candidature.offre.titre }}
+                        {% else %}
+                            Candidature spontanée
+                        {% endif %}
+
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <span class="date">
+
+                        {{ candidature.created_at|date:"d/m/Y" }}
+
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <div class="actions">
+
+                        <a
+                            href="{% url 'admin_candidature_detail' candidature.id %}"
+                            class="btn-view">
+
+                            Voir
+
+                        </a>
+
+                        {% if candidature.cv %}
+
+                        <a
+                            href="{{ candidature.cv.url }}"
+                            target="_blank"
+                            class="btn-cv">
+
+                            CV
+
+                        </a>
+
+                        {% endif %}
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+            {% empty %}
+
+            <tr>
+
+                <td colspan="6">
+
+                    <div class="empty-state">
+
+                        <i class="fa-solid fa-file-circle-xmark"></i>
+
+                        <h3>
+                            Aucune candidature reçue
+                        </h3>
+
+                        <p>
+                            Les futures candidatures apparaîtront ici automatiquement.
+                        </p>
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,1227 @@
+{% extends 'clients/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+
+:root{
+
+    --primary:#1b60ad;
+    --primary-dark:#154c89;
+
+    --secondary:#9fc63b;
+    --secondary-dark:#85ab2e;
+
+    --blue-light:#2f7ecb;
+    --blue-pale:#eef5fc;
+
+    --dark:#163b68;
+    --text:#666666;
+
+    --white:#ffffff;
+    --light:#f5f8fb;
+
+    --border:#e7edf5;
+
+    --shadow:0 10px 30px rgba(0,0,0,.08);
+    --shadow-hover:0 20px 45px rgba(27,96,173,.12);
+
+}
+
+/* =========================
+BASE
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:var(--light);
+    color:var(--text);
+}
+
+.container{
+    max-width:1280px;
+    margin:auto;
+    padding:0 24px;
+}
+
+/* =========================
+ANIMATIONS
+========================= */
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes scaleIn{
+
+    from{
+        opacity:0;
+        transform:scale(.95);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+/* =========================
+TOP BANNER
+========================= */
+
+.anniv-banner{
+
+    background:linear-gradient(
+        90deg,
+        var(--primary),
+        var(--blue-light),
+        var(--primary)
+    );
+
+    padding:15px 0;
+    margin-top:90px;
+}
+
+.anniv-inner{
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.anniv-badge{
+
+    background:var(--secondary);
+
+    color:white;
+
+    padding:8px 18px;
+
+    border-radius:50px;
+
+    font-size:11px;
+    font-weight:800;
+
+    letter-spacing:.12em;
+}
+
+.anniv-text{
+
+    color:white;
+    font-size:14px;
+}
+
+/* =========================
+HERO
+========================= */
+
+.hero-section{
+
+    position:relative;
+
+    padding:120px 0;
+
+    text-align:center;
+
+    background:
+    linear-gradient(
+        rgba(27,96,173,.88),
+        rgba(27,96,173,.92)
+    ),
+    url("{% static 'images/hero.jpg' %}");
+
+    background-size:cover;
+    background-position:center;
+}
+
+.hero-tag{
+
+    display:inline-block;
+
+    padding:10px 22px;
+
+    border-radius:50px;
+
+    background:rgba(255,255,255,.15);
+
+    border:1px solid rgba(255,255,255,.25);
+
+    color:white;
+
+    font-size:12px;
+    font-weight:700;
+
+    letter-spacing:.15em;
+
+    margin-bottom:25px;
+}
+
+.hero-title{
+
+    font-size:clamp(42px,6vw,68px);
+
+    color:white;
+
+    font-weight:800;
+
+    line-height:1.1;
+
+    margin-bottom:20px;
+}
+
+.hero-title span{
+    color:var(--secondary);
+}
+
+.hero-text{
+
+    max-width:700px;
+
+    margin:0 auto 40px;
+
+    color:rgba(255,255,255,.92);
+
+    line-height:1.8;
+}
+
+.hero-btn{
+
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:10px;
+
+    padding:18px 38px;
+
+    border:none;
+
+    border-radius:50px;
+
+    background:var(--secondary);
+
+    color:white;
+
+    font-size:15px;
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.35s;
+}
+
+.hero-btn:hover{
+
+    background:var(--secondary-dark);
+
+    transform:translateY(-4px);
+
+    box-shadow:
+    0 18px 40px rgba(159,198,59,.35);
+}
+
+/* =========================
+SECTION
+========================= */
+
+.bonsplans-section{
+
+    padding:100px 0;
+}
+
+.section-tag{
+
+    display:inline-block;
+
+    padding:8px 18px;
+
+    border-radius:50px;
+
+    background:rgba(159,198,59,.15);
+
+    color:var(--secondary-dark);
+
+    font-size:11px;
+
+    font-weight:800;
+
+    letter-spacing:.12em;
+
+    text-transform:uppercase;
+
+    margin-bottom:18px;
+}
+
+.section-title{
+
+    color:var(--primary);
+
+    font-size:42px;
+
+    font-weight:800;
+
+    margin-bottom:15px;
+}
+
+/* =========================
+GRID
+========================= */
+
+.bp-grid{
+
+    margin-top:60px;
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(280px,1fr));
+
+    gap:28px;
+}
+
+/* =========================
+CARD IMAGE
+========================= */
+
+.bp-card{
+
+    position:relative;
+
+    background:white;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    border:1px solid var(--border);
+
+    box-shadow:var(--shadow);
+
+    transition:.35s;
+
+    cursor:pointer;
+}
+
+.bp-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:var(--shadow-hover);
+}
+
+.bp-img{
+
+    width:100%;
+
+    aspect-ratio:3/4;
+
+    object-fit:cover;
+
+    display:block;
+}
+
+.bp-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:linear-gradient(
+        to top,
+        rgba(0,0,0,.7),
+        transparent
+    );
+
+    display:flex;
+
+    align-items:flex-end;
+
+    padding:25px;
+
+    opacity:0;
+
+    transition:.3s;
+}
+
+.bp-card:hover .bp-overlay{
+    opacity:1;
+}
+
+.bp-badge{
+
+    position:absolute;
+
+    top:15px;
+    left:15px;
+
+    background:var(--secondary);
+
+    color:white;
+
+    padding:7px 14px;
+
+    border-radius:30px;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    letter-spacing:.12em;
+}
+
+.bp-footer{
+
+    padding:18px 20px;
+}
+
+.bp-name{
+
+    color:var(--primary);
+
+    font-size:15px;
+
+    font-weight:700;
+}
+
+/* =========================
+TEXT CARD
+========================= */
+
+.bp-text-card{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    border:1px solid var(--border);
+
+    box-shadow:var(--shadow);
+
+    transition:.35s;
+}
+
+.bp-text-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:var(--shadow-hover);
+}
+
+.bp-icon{
+
+    width:60px;
+    height:60px;
+
+    border-radius:16px;
+
+    background:rgba(159,198,59,.15);
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:28px;
+
+    margin-bottom:20px;
+}
+
+.bp-mini-badge{
+
+    display:inline-block;
+
+    background:var(--secondary);
+
+    color:white;
+
+    padding:6px 14px;
+
+    border-radius:30px;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    margin-bottom:15px;
+}
+
+.bp-text-title{
+
+    color:var(--primary);
+
+    font-size:20px;
+
+    font-weight:800;
+
+    margin-bottom:12px;
+}
+
+.bp-text{
+
+    color:var(--text);
+
+    line-height:1.8;
+
+    margin-bottom:18px;
+}
+
+.bp-link{
+
+    color:var(--primary);
+
+    text-decoration:none;
+
+    font-weight:700;
+}
+
+.bp-link:hover{
+    color:var(--blue-light);
+}
+
+/* =========================
+LIGHTBOX
+========================= */
+
+.lb-bg{
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:99999;
+
+    background:rgba(0,0,0,.85);
+
+    backdrop-filter:blur(8px);
+
+    align-items:center;
+    justify-content:center;
+}
+
+.lb-img{
+
+    width:100%;
+
+    max-height:88vh;
+
+    object-fit:contain;
+
+    border-radius:20px;
+}
+
+.lb-close{
+
+    position:absolute;
+
+    top:-50px;
+    right:0;
+
+    width:42px;
+    height:42px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.2);
+
+    color:white;
+
+    cursor:pointer;
+}
+
+.lb-title{
+
+    margin-top:15px;
+
+    color:white;
+
+    text-align:center;
+
+    font-weight:600;
+}
+
+/* =========================
+MODAL
+========================= */
+
+.zc-modal-bg{
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:999999;
+
+    background:rgba(0,0,0,.65);
+
+    backdrop-filter:blur(6px);
+
+    align-items:center;
+    justify-content:center;
+}
+
+.zc-modal-box{
+
+    position:relative;
+
+    background:white;
+
+    width:92%;
+    max-width:480px;
+
+    padding:45px 35px;
+
+    border-radius:24px;
+
+    text-align:center;
+
+    animation:scaleIn .25s ease;
+}
+
+.zc-close{
+
+    position:absolute;
+
+    top:15px;
+    right:18px;
+
+    border:none;
+
+    background:none;
+
+    font-size:22px;
+
+    cursor:pointer;
+}
+
+.zc-icon{
+
+    width:80px;
+    height:80px;
+
+    margin:0 auto 25px;
+
+    border-radius:20px;
+
+    background:linear-gradient(
+        135deg,
+        var(--secondary),
+        var(--secondary-dark)
+    );
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    color:white;
+
+    font-size:34px;
+}
+
+.zc-title{
+
+    color:var(--primary);
+
+    font-size:28px;
+
+    font-weight:800;
+
+    margin-bottom:12px;
+}
+
+.zc-text{
+
+    color:var(--text);
+
+    line-height:1.8;
+}
+
+/* =========================
+RESPONSIVE
+========================= */
+
+@media(max-width:768px){
+
+    .container{
+        padding:0 16px;
+    }
+
+    .hero-section{
+        padding:90px 0;
+    }
+
+    .hero-title{
+        font-size:42px;
+    }
+
+    .section-title{
+        font-size:32px;
+    }
+
+    .bp-grid{
+        gap:20px;
+    }
+
+    .zc-modal-box{
+        padding:35px 25px;
+    }
+}
+
+</style>
+
+<!-- =========================
+HEADER
+========================= -->
+
+<header class="fixed top-0 left-0 w-full z-[1000]">
+
+
+
+</header>
+
+<!-- =========================
+ANNIVERSAIRE
+========================= -->
+
+<div class="anniv-banner pt-[80px] md:pt-[116px]">
+
+  <div class="container">
+
+    <div class="anniv-inner">
+
+      <div class="anniv-badge">
+        20 ANS
+      </div>
+
+      <div class="anniv-text">
+        Kapi Consult célèbre ses
+        <strong>20 ans d'excellence</strong>
+        au service des organisations.
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- =========================
+MAIN
+========================= -->
+
+<main>
+
+  <!-- HERO -->
+
+  <section class="hero-section">
+
+    <div class="container">
+
+      <div class="hero-tag">
+        Kapi Consult
+      </div>
+
+      <h1 class="hero-title">
+        Bons Plans
+        <span>&</span>
+        ZenCard
+      </h1>
+
+      <p class="hero-text">
+        Offres spéciales, promotions et avantages exclusifs sélectionnés pour vous.
+      </p>
+
+      <button class="hero-btn" onclick="openZencard()">
+        💳 Recharger ma ZenCard
+      </button>
+
+    </div>
+
+  </section>
+
+  <!-- SECTION -->
+
+  <section class="bonsplans-section">
+
+    <div class="container">
+
+      <div style="text-align:center">
+
+        <span class="section-tag">
+          Offres & Promotions
+        </span>
+
+        <h2 class="section-title">
+          Nos bons plans du moment
+        </h2>
+
+      </div>
+
+      <!-- GRID -->
+
+      <div class="bp-grid">
+
+        <!-- CARD 1 -->
+
+        <div class="bp-card"
+             onclick="openAffiche('{% static 'images/zencard_pub2.jpg' %}','ZenCard — Offre Spéciale')">
+
+          <span class="bp-badge">
+            ZenCard
+          </span>
+
+          <img
+            src="{% static 'images/zencard_pub2.jpg' %}"
+            class="bp-img"
+            alt="ZenCard Pub 2"
+          >
+
+          <div class="bp-overlay">
+            <span style="color:white;font-size:13px;font-weight:600">
+              🔍 Agrandir
+            </span>
+          </div>
+
+          <div class="bp-footer">
+
+            <span class="bp-name">
+              ZenCard — Offre Spéciale
+            </span>
+
+          </div>
+
+        </div>
+
+        <!-- CARD 2 -->
+
+        <div class="bp-card"
+             onclick="openAffiche('{% static 'images/zencard_pub3.jpg' %}','ZenCard — Promotion Exclusive')">
+
+          <span class="bp-badge">
+            ZenCard
+          </span>
+
+          <img
+            src="{% static 'images/zencard_pub3.jpg' %}"
+            class="bp-img"
+            alt="ZenCard Pub 3"
+          >
+
+          <div class="bp-overlay">
+            <span style="color:white;font-size:13px;font-weight:600">
+              🔍 Agrandir
+            </span>
+          </div>
+
+          <div class="bp-footer">
+
+            <span class="bp-name">
+              ZenCard — Promotion Exclusive
+            </span>
+
+          </div>
+
+        </div>
+
+        <!-- CARD 3 -->
+
+        <div class="bp-card"
+             onclick="openAffiche('{% static 'images/zencard_pub5.jpg' %}','ZenCard — Bon Plan #5')">
+
+          <span class="bp-badge">
+            ZenCard
+          </span>
+
+          <img
+            src="{% static 'images/zencard_pub5.jpg' %}"
+            class="bp-img"
+            alt="ZenCard Pub 5"
+          >
+
+          <div class="bp-overlay">
+            <span style="color:white;font-size:13px;font-weight:600">
+              🔍 Agrandir
+            </span>
+          </div>
+
+          <div class="bp-footer">
+
+            <span class="bp-name">
+              ZenCard — Bon Plan #5
+            </span>
+
+          </div>
+
+        </div>
+
+        <!-- CARD 4 -->
+
+        <div class="bp-card"
+             onclick="openAffiche('{% static 'images/zencard_pub5b.jpg' %}','ZenCard — Édition Spéciale')">
+
+          <span class="bp-badge">
+            ZenCard
+          </span>
+
+          <img
+            src="{% static 'images/zencard_pub5b.jpg' %}"
+            class="bp-img"
+            alt="ZenCard Pub 5B"
+          >
+
+          <div class="bp-overlay">
+            <span style="color:white;font-size:13px;font-weight:600">
+              🔍 Agrandir
+            </span>
+          </div>
+
+          <div class="bp-footer">
+
+            <span class="bp-name">
+              ZenCard — Édition Spéciale
+            </span>
+
+          </div>
+
+        </div>
+
+        <!-- CARD 5 -->
+
+        <div class="bp-card"
+             onclick="openAffiche('{% static 'images/zencard_pub6.jpg' %}','ZenCard — Bon Plan #6')">
+
+          <span class="bp-badge">
+            ZenCard
+          </span>
+
+          <img
+            src="{% static 'images/zencard_pub6.jpg' %}"
+            class="bp-img"
+            alt="ZenCard Pub 6"
+          >
+
+          <div class="bp-overlay">
+            <span style="color:white;font-size:13px;font-weight:600">
+              🔍 Agrandir
+            </span>
+          </div>
+
+          <div class="bp-footer">
+
+            <span class="bp-name">
+              ZenCard — Bon Plan #6
+            </span>
+
+          </div>
+
+        </div>
+
+        <!-- CARD 6 -->
+
+        <div class="bp-card"
+             onclick="openAffiche('{% static 'images/zencard_pub6b.jpg' %}','ZenCard — Offre Limitée')">
+
+          <span class="bp-badge">
+            ZenCard
+          </span>
+
+          <img
+            src="{% static 'images/zencard_pub6b.jpg' %}"
+            class="bp-img"
+            alt="ZenCard Pub 6B"
+          >
+
+          <div class="bp-overlay">
+            <span style="color:white;font-size:13px;font-weight:600">
+              🔍 Agrandir
+            </span>
+          </div>
+
+          <div class="bp-footer">
+
+            <span class="bp-name">
+              ZenCard — Offre Limitée
+            </span>
+
+          </div>
+
+        </div>
+
+        <!-- CARD 7 -->
+
+        <div class="bp-card"
+             onclick="openAffiche('{% static 'images/zencard_pub7.jpg' %}','ZenCard — Bon Plan #7')">
+
+          <span class="bp-badge">
+            ZenCard
+          </span>
+
+          <img
+            src="{% static 'images/zencard_pub7.jpg' %}"
+            class="bp-img"
+            alt="ZenCard Pub 7"
+          >
+
+          <div class="bp-overlay">
+            <span style="color:white;font-size:13px;font-weight:600">
+              🔍 Agrandir
+            </span>
+          </div>
+
+          <div class="bp-footer">
+
+            <span class="bp-name">
+              ZenCard — Bon Plan #7
+            </span>
+
+          </div>
+
+        </div>
+
+        <!-- CARD 8 -->
+
+        <div class="bp-card"
+             onclick="openAffiche('{% static 'images/zencard_product.jpg' %}','ZenCard — Le Produit')">
+
+          <span class="bp-badge">
+            ZenCard
+          </span>
+
+          <img
+            src="{% static 'images/zencard_product.jpg' %}"
+            class="bp-img"
+            alt="ZenCard Produit"
+          >
+
+          <div class="bp-overlay">
+            <span style="color:white;font-size:13px;font-weight:600">
+              🔍 Agrandir
+            </span>
+          </div>
+
+          <div class="bp-footer">
+
+            <span class="bp-name">
+              ZenCard — Le Produit
+            </span>
+
+          </div>
+
+        </div>
+
+        <!-- CARD TEXTE -->
+
+        <div class="bp-text-card">
+
+          <div style="
+            width:44px;
+            height:44px;
+            background:var(--gold-pale);
+            border-radius:12px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:20px;
+            margin-bottom:14px">
+            💡
+          </div>
+
+          <span style="
+            display:inline-block;
+            background:var(--gold);
+            color:white;
+            font-size:10px;
+            font-weight:800;
+            padding:4px 10px;
+            border-radius:20px;
+            margin-bottom:12px">
+            Bon Plan
+          </span>
+
+          <h3 style="
+            font-size:16px;
+            font-weight:700;
+            color:var(--blue-deep);
+            margin-bottom:10px">
+            Formation Gratuite : Excel RH
+          </h3>
+
+          <p style="
+            font-size:13px;
+            color:var(--gray);
+            line-height:1.7;
+            margin-bottom:16px">
+            Kapi Consult vous offre un accès gratuit à sa formation Excel RH.
+          </p>
+
+          <a href="#"
+             style="
+             color:var(--blue-mid);
+             font-weight:700;
+             text-decoration:none;
+             font-size:13px">
+            Voir le détail →
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+<!-- =========================
+LIGHTBOX
+========================= -->
+
+<div id="lb-modal"
+     class="lb-bg"
+     onclick="closeLb()">
+
+  <div style="
+      position:relative;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      max-width:640px;
+      width:94%;"
+      onclick="event.stopPropagation()">
+
+    <button class="lb-close"
+            onclick="closeLb()">
+      ✕
+    </button>
+
+    <img id="lb-img"
+         src=""
+         alt=""
+         class="lb-img">
+
+    <div id="lb-title"
+         style="
+         color:white;
+         margin-top:16px;
+         font-size:14px;
+         font-weight:600;
+         text-align:center;">
+    </div>
+
+  </div>
+
+</div>
+
+<!-- =========================
+MODAL ZENCARD
+========================= -->
+
+<div id="zencard-modal"
+     class="zc-modal-bg">
+
+  <div class="zc-modal-box">
+
+    <button class="zc-close"
+            onclick="closeZencard()">
+      ✕
+    </button>
+
+    <div style="
+      width:72px;
+      height:72px;
+      margin:0 auto 22px;
+      border-radius:20px;
+      background:linear-gradient(135deg,var(--gold),#c9990f);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:32px;">
+      💳
+    </div>
+
+    <h2 style="
+      font-family:'Playfair Display',serif;
+      font-size:24px;
+      font-weight:700;
+      color:var(--blue-deep);
+      margin-bottom:10px">
+      Recharge ZenCard
+    </h2>
+
+    <p style="
+      font-size:14px;
+      color:var(--gray);
+      line-height:1.7">
+      Le système de recharge sera bientôt disponible.
+    </p>
+
+  </div>
+
+</div>
+
+<!-- =========================
+FOOTER
+========================= -->
+
+
+
+<!-- =========================
+SCRIPT
+========================= -->
+
+<script>
+
+function openAffiche(image, title) {
+
+  document.getElementById('lb-modal').style.display = 'flex';
+
+  document.getElementById('lb-img').src = image;
+
+  document.getElementById('lb-title').innerText = title;
+}
+
+function closeLb() {
+
+  document.getElementById('lb-modal').style.display = 'none';
+}
+
+function openZencard() {
+
+  document.getElementById('zencard-modal').style.display = 'flex';
+}
+
+function closeZencard() {
+
+  document.getElementById('zencard-modal').style.display = 'none';
+}
+
+</script>
+
+{% endblock %}

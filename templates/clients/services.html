@@ -1,0 +1,633 @@
+{% extends 'clients/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+
+/* ==================================
+   SERVICES PAGE
+================================== */
+
+.services-hero{
+    position:relative;
+    height:500px;
+    background: url("{% static 'images/about-hero.png' %}");
+    center center/cover no-repeat;
+}
+
+.services-overlay{
+    position:absolute;
+    inset:0;
+    background:rgba(27,96,173,.78);
+}
+
+.services-hero-content{
+    position:relative;
+    z-index:2;
+
+    max-width:760px;
+
+    color:#fff;
+
+    padding-top:100px;
+}
+
+.hero-badge{
+    display:inline-block;
+
+    background:#9fc63b;
+    color:#fff;
+
+    padding:10px 22px;
+
+    font-size:14px;
+    font-weight:600;
+
+    letter-spacing:1px;
+}
+
+.services-hero-content h1{
+    font-size:60px;
+    font-weight:800;
+
+    line-height:1.15;
+
+    margin:25px 0;
+}
+
+.services-hero-content p{
+    font-size:18px;
+    line-height:1.9;
+}
+
+/* ==========================
+   INTRO
+========================== */
+
+.services-intro{
+    padding:110px 0;
+}
+
+.intro-content{
+    max-width:900px;
+}
+
+.section-subtitle{
+    color:#2f7ecb;
+    font-size:15px;
+    font-weight:700;
+    text-transform:uppercase;
+}
+
+.intro-content h2{
+    font-size:48px;
+    font-weight:800;
+
+    margin:15px 0 25px;
+}
+
+.intro-content p{
+    color:#555;
+    line-height:1.9;
+}
+
+/* ==========================
+   SERVICES
+========================== */
+
+.services-grid-section{
+    padding-bottom:110px;
+}
+
+.services-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+}
+
+.service-card{
+    background:#fff;
+
+    overflow:hidden;
+
+    border-radius:10px;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,.08);
+
+    transition:.35s;
+}
+
+.service-card:hover{
+    transform:translateY(-10px);
+}
+
+.service-card img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+}
+
+.service-content{
+    padding:28px;
+}
+
+.service-content h3{
+    color:#2f7ecb;
+
+    font-size:22px;
+    font-weight:700;
+
+    margin-bottom:15px;
+}
+
+.service-content p{
+    color:#666;
+    line-height:1.8;
+}
+
+/* ==========================
+   POURQUOI ZENER
+========================== */
+
+.why-us{
+    background:#f7f9fc;
+    padding:110px 0;
+}
+
+.why-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:70px;
+    align-items:center;
+}
+
+.why-image img{
+    width:100%;
+    border-radius:10px;
+}
+
+.why-content h2{
+    font-size:48px;
+    font-weight:800;
+
+    margin:15px 0 25px;
+}
+
+.why-content p{
+    color:#666;
+    line-height:1.9;
+}
+
+.why-list{
+    margin-top:30px;
+}
+
+.why-list li{
+    list-style:none;
+
+    margin-bottom:18px;
+
+    font-weight:500;
+}
+
+.why-list li::before{
+    content:"✓";
+
+    color:#9fc63b;
+
+    font-weight:700;
+
+    margin-right:10px;
+}
+
+/* ==========================
+   PROCESS
+========================== */
+
+.process-section{
+    padding:110px 0;
+}
+
+.process-header{
+    text-align:center;
+    margin-bottom:70px;
+}
+
+.process-header h2{
+    font-size:48px;
+    font-weight:800;
+}
+
+.process-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+}
+
+.process-card{
+    background:#fff;
+
+    text-align:center;
+
+    padding:45px 30px;
+
+    border-radius:10px;
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,.08);
+}
+
+.process-number{
+    font-size:60px;
+    font-weight:800;
+
+    color:#9fc63b;
+
+    margin-bottom:15px;
+}
+
+.process-card h3{
+    color:#2f7ecb;
+    font-size:24px;
+    font-weight:700;
+}
+
+.process-card p{
+    margin-top:12px;
+    color:#666;
+}
+
+/* ==========================
+   CTA
+========================== */
+
+.service-cta{
+    background:#2f7ecb;
+
+    color:#fff;
+
+    text-align:center;
+
+    padding:110px 0;
+}
+
+.service-cta h2{
+    font-size:52px;
+    font-weight:800;
+
+    margin-bottom:20px;
+}
+
+.service-cta p{
+    font-size:18px;
+    opacity:.95;
+}
+
+.cta-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    width:240px;
+    height:60px;
+
+    margin-top:35px;
+
+    border-radius:60px;
+
+    background:#9fc63b;
+    color:#fff;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.cta-btn:hover{
+    background:#89b22e;
+    color:#fff;
+
+    transform:translateY(-3px);
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:991px){
+
+    .services-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .why-grid{
+        grid-template-columns:1fr;
+    }
+
+    .process-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .services-hero-content h1,
+    .intro-content h2,
+    .why-content h2,
+    .process-header h2,
+    .service-cta h2{
+        font-size:40px;
+    }
+}
+
+@media(max-width:768px){
+
+    .services-grid,
+    .process-grid{
+        grid-template-columns:1fr;
+    }
+
+    .services-hero-content h1{
+        font-size:34px;
+    }
+}
+
+</style>
+
+<!-- HERO -->
+
+<section class="services-hero">
+
+    <div class="services-overlay"></div>
+
+    <div class="container">
+
+        <div class="services-hero-content">
+
+            <span class="hero-badge">
+                NOS SERVICES
+            </span>
+
+            <h1>
+                Des solutions énergétiques
+                adaptées à vos besoins
+            </h1>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- INTRO -->
+
+<section class="services-intro">
+
+    <div class="container">
+
+        <div class="intro-content">
+
+            <h2>
+                Une expertise énergétique complète
+            </h2>
+
+            <p>
+                Grâce à son réseau national et à son savoir-faire,
+                ZENER propose des services de qualité répondant aux
+                besoins des particuliers comme des professionnels.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- SERVICES -->
+
+<section class="services-grid-section">
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <h2>Nos domaines d'intervention</h2>
+
+        </div>
+
+        <div class="services-grid">
+
+            <article class="service-card">
+
+                <img src="{% static 'images/card1.jpg' %}" alt="">
+
+                <div class="service-content">
+
+                    <h3>
+                        Distribution de carburants
+                    </h3>
+
+                    <p>
+                        Réseau national de stations-services offrant
+                        des carburants de qualité.
+                    </p>
+
+                </div>
+
+            </article>
+
+            <article class="service-card">
+
+                <img src="{% static 'images/card2.jpg' %}" alt="">
+
+                <div class="service-content">
+
+                    <h3>
+                        Gaz domestique
+                    </h3>
+
+                    <p>
+                        Solutions énergétiques adaptées aux ménages.
+                    </p>
+
+                </div>
+
+            </article>
+
+            <article class="service-card">
+
+                <img src="{% static 'images/card3.jpg' %}" alt="">
+
+                <div class="service-content">
+
+                    <h3>
+                        Lubrifiants
+                    </h3>
+
+                    <p>
+                        Produits performants pour véhicules et industries.
+                    </p>
+
+                </div>
+
+            </article>
+
+            <article class="service-card">
+
+                <img src="{% static 'images/card4.jpg' %}" alt="">
+
+                <div class="service-content">
+
+                    <h3>
+                        Services de proximité
+                    </h3>
+
+                    <p>
+                        Des solutions innovantes pour simplifier le quotidien.
+                    </p>
+
+                </div>
+
+            </article>
+
+                        <article class="service-card">
+
+                <img src="{% static 'images/card5.jpg' %}" alt="">
+
+                <div class="service-content">
+
+                    <h3>
+                        Environnement & écosystème
+                    </h3>
+
+                    <p>
+                                                    Initiatives durables et actions
+                            en faveur de la préservation de l’environnement.
+                    </p>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- POURQUOI NOUS -->
+
+<section class="why-us">
+
+    <div class="container">
+
+        <div class="why-grid">
+
+            <div class="why-image">
+
+                <img src="{% static 'images/why-zener.png' %}" alt="">
+
+            </div>
+
+            <div class="why-content">
+
+                <h2>
+                    Pourquoi choisir ZENER ?
+                </h2>
+
+                <ul>
+
+                    <li>Réseau national performant</li>
+
+                    <li>Produits certifiés et fiables</li>
+
+                    <li>Service client réactif</li>
+
+                    <li>Innovation permanente</li>
+
+                    <li>Équipe expérimentée</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- PROCESSUS -->
+
+<section class="process-section">
+
+    <div class="container">
+
+        <h2>
+            Notre approche
+        </h2>
+
+        <div class="process-grid">
+
+            <div class="process-card">
+
+                <span>01</span>
+
+                <h3>Analyse</h3>
+
+            </div>
+
+            <div class="process-card">
+
+                <span>02</span>
+
+                <h3>Conseil</h3>
+
+            </div>
+
+            <div class="process-card">
+
+                <span>03</span>
+
+                <h3>Mise en œuvre</h3>
+
+            </div>
+
+            <div class="process-card">
+
+                <span>04</span>
+
+                <h3>Suivi</h3>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CTA -->
+
+<section class="service-cta">
+
+    <div class="container">
+
+        <h2>
+            Besoin d'une solution énergétique ?
+        </h2>
+
+        <p>
+            Nos équipes sont à votre disposition.
+        </p>
+
+        <a href="{% url 'contact' %}" class="cta-btn">
+            Nous contacter
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}
