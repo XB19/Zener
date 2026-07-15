@@ -226,7 +226,7 @@
    BOUTON CONTACT
 ===================== */
 
-.contact-btn{
+.nav-contact-btn{
 
     min-width:220px;
     height:56px;
@@ -248,13 +248,87 @@
     transition:.3s;
 }
 
-.contact-btn:hover{
+.nav-contact-btn:hover{
 
     background:#87b02f;
 
     color:#fff;
 
     transform:translateY(-2px);
+}
+
+/* =====================
+   BURGER (mobile/tablette)
+===================== */
+
+.burger{
+
+    display:none;
+
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:5px;
+
+    width:44px;
+    height:44px;
+
+    border:none;
+    background:transparent;
+
+    cursor:pointer;
+
+    flex-shrink:0;
+
+    z-index:10001;
+}
+
+.burger span{
+
+    display:block;
+
+    width:26px;
+    height:3px;
+
+    background:#1c1c1c;
+    border-radius:2px;
+
+    transition:.3s ease;
+}
+
+.burger.active span:nth-child(1){
+    transform:translateY(8px) rotate(45deg);
+}
+
+.burger.active span:nth-child(2){
+    opacity:0;
+}
+
+.burger.active span:nth-child(3){
+    transform:translateY(-8px) rotate(-45deg);
+}
+
+.nav-overlay{
+
+    display:none;
+
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.35);
+
+    z-index:9998;
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:opacity .3s ease, visibility .3s ease;
+}
+
+.nav-overlay.active{
+
+    opacity:1;
+    visibility:visible;
 }
 
 /* =====================
@@ -273,7 +347,75 @@
         height:70px;
     }
 
+    .burger{
+
+        display:flex;
+    }
+
+    .nav-overlay{
+
+        display:block;
+    }
+
     .nav-menu{
+
+        position:fixed;
+        top:85px;
+        left:0;
+
+        width:100%;
+        height:calc(100vh - 85px);
+
+        background:#fff;
+
+        display:flex;
+        justify-content:flex-start;
+
+        padding:20px;
+
+        overflow-y:auto;
+
+        transform:translateX(-100%);
+        opacity:0;
+        visibility:hidden;
+
+        transition:transform .35s ease, opacity .35s ease, visibility .35s ease;
+
+        box-shadow:6px 0 25px rgba(0,0,0,.08);
+
+        z-index:9999;
+    }
+
+    .nav-menu.active{
+
+        transform:translateX(0);
+        opacity:1;
+        visibility:visible;
+    }
+
+    .nav-links{
+
+        flex-direction:column;
+        align-items:stretch;
+        gap:2px;
+
+        width:100%;
+    }
+
+    .nav-links a{
+
+        height:auto;
+
+        width:100%;
+        padding:16px 10px;
+
+        font-size:17px;
+        justify-content:flex-start;
+
+        border-bottom:1px solid #f0f0f0;
+    }
+
+    .nav-links a::after{
 
         display:none;
     }
@@ -283,7 +425,7 @@
         padding:0 20px;
     }
 
-    .contact-btn{
+    .nav-contact-btn{
 
         min-width:180px;
         height:50px;
@@ -298,22 +440,58 @@
 
 @media(max-width:576px){
 
-    .contact-btn{
+    .header-container{
 
-        min-width:150px;
+        padding:0 15px;
+        gap:10px;
+    }
 
-        font-size:14px;
+    .logo img{
+
+        height:56px;
+    }
+
+    .nav-contact-btn{
+
+        min-width:0;
+        padding:0 16px;
+
+        font-size:13px;
     }
 
     .header-actions{
 
-        gap:15px;
+        gap:10px;
     }
 
     .cart-btn{
 
-        width:40px;
-        height:40px;
+        width:38px;
+        height:38px;
+    }
+
+    .cart-btn svg{
+
+        width:24px;
+        height:24px;
+    }
+
+    .burger{
+
+        width:38px;
+        height:38px;
+    }
+}
+
+@media(max-width:380px){
+
+    .nav-contact-btn span,
+    .nav-contact-btn{
+
+        min-width:0;
+        padding:0 12px;
+
+        font-size:12px;
     }
 }
 </style>
@@ -331,7 +509,7 @@
 
         </a>
 
-        <nav class="nav-menu">
+        <nav class="nav-menu" id="navMenu">
 
     <ul class="nav-links">
 
@@ -405,13 +583,79 @@
 
             </a>
 
-            <a href="{% url 'contact' %}" class="contact-btn">
+            <a href="{% url 'contact' %}" class="nav-contact-btn">
                 Nous contacter
             </a>
+
+            <button
+                type="button"
+                class="burger"
+                id="navBurger"
+                aria-label="Ouvrir le menu"
+                aria-controls="navMenu"
+                aria-expanded="false">
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </button>
 
         </div>
 
     </div>
 
+    <div class="nav-overlay" id="navOverlay"></div>
+
 </header>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    const burger = document.getElementById("navBurger");
+    const navMenu = document.querySelector(".nav-menu");
+    const overlay = document.getElementById("navOverlay");
+
+    if(burger && navMenu && overlay){
+
+        const closeMenu = function(){
+
+            burger.classList.remove("active");
+            navMenu.classList.remove("active");
+            overlay.classList.remove("active");
+
+            burger.setAttribute("aria-expanded", "false");
+        };
+
+        const toggleMenu = function(){
+
+            const isOpen = navMenu.classList.toggle("active");
+
+            burger.classList.toggle("active", isOpen);
+            overlay.classList.toggle("active", isOpen);
+
+            burger.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        };
+
+        burger.addEventListener("click", toggleMenu);
+
+        overlay.addEventListener("click", closeMenu);
+
+        navMenu.querySelectorAll("a").forEach(function(link){
+
+            link.addEventListener("click", closeMenu);
+        });
+
+        window.addEventListener("resize", function(){
+
+            if(window.innerWidth > 991){
+                closeMenu();
+            }
+        });
+    }
+
+});
+
+</script>
 

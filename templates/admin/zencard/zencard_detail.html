@@ -28,6 +28,7 @@
 /* IMAGE CNI */
 .cni-image{
     width:280px;
+    max-width:100%;
     border-radius:12px;
     margin-top:10px;
     border:1px solid #ddd;
@@ -117,6 +118,34 @@
 .btn-back:hover{
     background:#144a86;
     transform:translateY(-2px);
+}
+
+@media(max-width:768px){
+
+    .detail-card{
+        padding:25px;
+    }
+
+    .actions,
+    div[style*="margin-top:35px"]{
+        flex-wrap:wrap;
+    }
+}
+
+@media(max-width:480px){
+
+    .detail-card{
+        padding:18px;
+        border-radius:14px;
+    }
+
+    .actions{
+        flex-direction:column;
+    }
+
+    .actions .btn{
+        width:100%;
+    }
 }
 
 </style>

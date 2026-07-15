@@ -163,6 +163,8 @@
 
 .form-group input,
 .form-group select{
+    width:100%;
+    min-width:0;
     height:55px;
     padding:0 15px;
     border:1px solid #ddd;
@@ -211,12 +213,34 @@
 
 /* MOBILE */
 
+@media(max-width:992px){
+
+    .zencard-hero{
+        height:auto;
+        min-height:400px;
+    }
+
+    .zencard-content{
+        padding:80px 0 60px;
+    }
+
+    .benefits-section,
+    .steps-section,
+    .form-section,
+    .zencard-cta{
+        padding:70px 0;
+    }
+
+    .benefits-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
 @media(max-width:900px){
 
-    .benefits-grid,
     .steps-grid,
     .form-grid{
-        grid-template-columns:1fr;
+        grid-template-columns:minmax(0,1fr);
     }
 
     .form-group.full{
@@ -225,6 +249,50 @@
 
     .zencard-content h1{
         font-size:42px;
+    }
+
+    .form-wrapper{
+        padding:35px;
+    }
+}
+
+@media(max-width:576px){
+
+    .zencard-content h1{
+        font-size:28px;
+        margin:18px 0;
+    }
+
+    .zencard-content p{
+        font-size:15px;
+    }
+
+    .benefits-section,
+    .steps-section,
+    .form-section,
+    .zencard-cta{
+        padding:50px 0;
+    }
+
+    .benefits-grid{
+        grid-template-columns:minmax(0,1fr);
+    }
+
+    .section-heading h2{
+        font-size:28px;
+    }
+
+    .form-wrapper{
+        padding:22px;
+    }
+
+    .zencard-cta h2{
+        font-size:28px;
+    }
+
+    .submit-btn,
+    .cta-btn{
+        width:100%;
     }
 }
 

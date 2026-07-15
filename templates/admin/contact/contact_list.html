@@ -80,6 +80,36 @@ tbody tr:hover{
     font-weight:600;
 }
 
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+    .page-header{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:10px;
+    }
+
+    .page-header h1{
+        font-size:26px;
+    }
+
+    .table-card{
+        overflow-x:auto;
+        -webkit-overflow-scrolling:touch;
+    }
+
+    table{
+        min-width:700px;
+    }
+
+    thead th,
+    tbody td{
+        padding:14px;
+        font-size:14px;
+    }
+}
+
 </style>
 
 <div class="page-header">

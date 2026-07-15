@@ -53,6 +53,7 @@
 .success-card{
 
     width:500px;
+    max-width:90%;
 
     background:white;
 
@@ -254,6 +255,8 @@
 
 .form-group input,
 .form-group textarea{
+    width:100%;
+    min-width:0;
     padding:15px;
     border:1px solid #dbe5f1;
     border-radius:10px;
@@ -303,12 +306,26 @@
 
 @media(max-width:992px){
 
+    .job-hero{
+        padding:60px 0;
+    }
+
+    .job-wrapper,
+    .apply-section{
+        padding:60px 0;
+    }
+
     .job-layout{
-        grid-template-columns:1fr;
+        grid-template-columns:minmax(0,1fr);
+        gap:25px;
+    }
+
+    .job-card{
+        padding:30px;
     }
 
     .form-grid{
-        grid-template-columns:1fr;
+        grid-template-columns:minmax(0,1fr);
     }
 
     .form-group.full{
@@ -317,6 +334,55 @@
 
     .job-hero h1{
         font-size:34px;
+    }
+
+    .form-container{
+        padding:35px;
+    }
+}
+
+@media(max-width:576px){
+
+    .job-hero{
+        padding:45px 0;
+    }
+
+    .job-hero h1{
+        font-size:26px;
+    }
+
+    .job-meta{
+        gap:10px;
+    }
+
+    .job-meta span{
+        padding:8px 14px;
+        font-size:13px;
+    }
+
+    .job-wrapper,
+    .apply-section{
+        padding:40px 0;
+    }
+
+    .job-card{
+        padding:22px;
+    }
+
+    .sidebar-card{
+        padding:22px;
+    }
+
+    .section-job h2{
+        font-size:21px;
+    }
+
+    .form-container{
+        padding:22px;
+    }
+
+    .success-card{
+        padding:30px 25px;
     }
 }
 

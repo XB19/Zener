@@ -272,6 +272,8 @@
 
 .form-group input,
 .form-group textarea{
+    width:100%;
+    min-width:0;
     padding:15px;
     border:1px solid #ddd;
 }
@@ -343,9 +345,28 @@
 
 @media(max-width:992px){
 
+    .career-hero{
+        height:auto;
+        min-height:400px;
+    }
+
+    .career-content{
+        padding:80px 0 60px;
+    }
+
+    .career-intro,
+    .hr-values,
+    .career-stats,
+    .jobs-section,
+    .application-section,
+    .career-cta{
+        padding:70px 0;
+    }
+
     .career-grid,
     .form-grid{
-        grid-template-columns:1fr;
+        grid-template-columns:minmax(0,1fr);
+        gap:35px;
     }
 
     .values-grid,
@@ -363,6 +384,10 @@
         text-align:center;
     }
 
+    .application-box{
+        padding:40px;
+    }
+
 }
 
 @media(max-width:768px){
@@ -373,7 +398,56 @@
 
     .values-grid,
     .stats-grid{
-        grid-template-columns:1fr;
+        grid-template-columns:minmax(0,1fr);
+    }
+
+    .career-text h2,
+    .section-title h2,
+    .career-cta h2{
+        font-size:32px;
+    }
+
+}
+
+@media(max-width:576px){
+
+    .career-content h1{
+        font-size:28px;
+        margin:18px 0;
+    }
+
+    .career-content p{
+        font-size:15px;
+    }
+
+    .career-intro,
+    .hr-values,
+    .career-stats,
+    .jobs-section,
+    .application-section,
+    .career-cta{
+        padding:50px 0;
+    }
+
+    .stat-box span{
+        font-size:38px;
+    }
+
+    .job-card{
+        padding:25px;
+    }
+
+    .job-btn{
+        width:100%;
+    }
+
+    .application-box{
+        padding:25px;
+    }
+
+    .submit-btn,
+    .cta-btn{
+        width:100%;
     }
 
 }

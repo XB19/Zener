@@ -191,6 +191,122 @@
     text-decoration:none;
     font-weight:600;
 }
+
+/* ======================
+   RESPONSIVE
+====================== */
+
+@media(max-width:992px){
+
+    .about-hero{
+        height:auto;
+        min-height:420px;
+    }
+
+    .about-hero-content{
+        padding:80px 0 60px;
+    }
+
+    .about-hero-content h1{
+        font-size:44px;
+    }
+
+    .about-company,
+    .about-stats,
+    .values-section,
+    .mission-section,
+    .about-cta{
+        padding:70px 0;
+    }
+
+    .about-grid{
+        grid-template-columns:minmax(0,1fr);
+        gap:40px;
+    }
+
+    .about-text h2{
+        font-size:32px;
+    }
+
+    .stats-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:30px 20px;
+    }
+
+    .counter{
+        font-size:44px;
+    }
+
+    .values-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .mission-grid{
+        grid-template-columns:minmax(0,1fr);
+        gap:25px;
+    }
+
+    .mission-card{
+        padding:35px;
+    }
+
+    .about-cta h2{
+        font-size:34px;
+    }
+}
+
+@media(max-width:576px){
+
+    .about-hero-content h1{
+        font-size:32px;
+        margin:18px 0;
+    }
+
+    .about-hero-content p{
+        font-size:16px;
+    }
+
+    .about-company,
+    .about-stats,
+    .values-section,
+    .mission-section,
+    .about-cta{
+        padding:50px 0;
+    }
+
+    .about-text h2{
+        font-size:26px;
+    }
+
+    .stats-grid{
+        grid-template-columns:1fr 1fr;
+        gap:25px 15px;
+    }
+
+    .counter{
+        font-size:36px;
+    }
+
+    .values-grid{
+        grid-template-columns:minmax(0,1fr);
+    }
+
+    .value-card{
+        padding:25px;
+    }
+
+    .mission-card{
+        padding:25px;
+    }
+
+    .about-cta h2{
+        font-size:26px;
+    }
+
+    .cta-btn{
+        width:100%;
+    }
+}
 </style>
 
 <!-- HERO -->

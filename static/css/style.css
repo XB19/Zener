@@ -4,9 +4,15 @@
     box-sizing:border-box;
 }
 
+html{
+    overflow-x:hidden;
+    max-width:100%;
+}
+
 body{
     font-family:'Poppins',sans-serif;
     background:#f4f4f4;
+    max-width:100%;
 }
 
 .container{
@@ -26,6 +32,21 @@ body{
 
     background:url("../images/hero-zener.png")
     center center / cover no-repeat;
+}
+
+/* vidéo de fond */
+
+.hero-video{
+    position:absolute;
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+    object-position:center;
+
+    z-index:0;
 }
 
 /* voile général */
@@ -1540,4 +1561,244 @@ body{
         font-size:16px;
     }
 
+}
+
+/* ======================================
+   RESPONSIVE COMPLEMENTS (mobile / tablette)
+====================================== */
+
+.hero-buttons{
+    flex-wrap:wrap;
+}
+
+@media(max-width:576px){
+
+    .hero-buttons{
+        flex-direction:column;
+        align-items:stretch;
+        gap:12px;
+    }
+
+    .hero-btn,
+    .hero-btn-outline{
+        width:100%;
+    }
+}
+
+/* PRESENTATION */
+
+@media(max-width:992px){
+
+    .presentation-grid{
+        grid-template-columns:1fr;
+        gap:35px;
+    }
+}
+
+@media(max-width:576px){
+
+    .presentation{
+        padding:50px 0;
+    }
+
+    .presentation-grid{
+        margin-top:40px;
+        gap:25px;
+    }
+}
+
+/* STATS */
+
+@media(max-width:768px){
+
+    .stats-wrapper{
+        flex-wrap:wrap;
+        gap:25px;
+    }
+}
+
+@media(max-width:576px){
+
+    .stats-section{
+        padding:40px 0 60px;
+    }
+
+    .stats-wrapper{
+        gap:20px 15px;
+    }
+
+    .stat-circle{
+        width:72px;
+        height:72px;
+    }
+
+    .stat-circle span{
+        font-size:26px;
+    }
+
+    .stat-divider{
+        display:none;
+    }
+}
+
+/* EXPERTISE */
+
+@media(max-width:576px){
+
+    .expertise-section{
+        padding:50px 0 60px;
+    }
+
+    .section-title{
+        height:auto;
+        min-height:48px;
+        padding:12px 22px;
+        font-size:15px;
+        text-align:center;
+    }
+
+    .expertise-card{
+        width:230px;
+        height:200px;
+    }
+}
+
+@media(max-width:768px){
+
+    .expertise-banner-content{
+        padding:20px 25px;
+    }
+
+    .banner-title{
+        font-size:18px;
+        padding:10px 25px;
+    }
+}
+
+@media(max-width:576px){
+
+    .expertise-banner{
+        height:auto;
+        min-height:380px;
+        padding:40px 0;
+    }
+}
+
+/* ENGAGEMENTS */
+
+@media(max-width:576px){
+
+    .engagements{
+        padding:50px 0;
+    }
+
+    .engagement-card{
+        max-width:100%;
+    }
+}
+
+/* NEWS */
+
+@media(max-width:768px){
+
+    .news-section{
+        padding:50px 0;
+    }
+
+    .news-wrapper{
+        padding:25px;
+    }
+}
+
+@media(max-width:576px){
+
+    .news-card{
+        padding:25px;
+        min-height:auto;
+    }
+
+    .news-card h3{
+        font-size:26px;
+    }
+}
+
+/* ==========================================
+   TESTIMONIALS (fix: rules ciblaient des
+   classes inexistantes, le bloc ne devenait
+   jamais responsive)
+========================================== */
+
+@media(max-width:992px){
+
+    .testimonials-section{
+        padding:60px 0;
+    }
+
+    .testimonial-background{
+        min-height:auto;
+        padding:40px 0;
+    }
+
+    .testimonial-wrapper{
+        padding-top:0;
+    }
+
+    .green-frame{
+        display:none;
+    }
+
+    .testimonial-card{
+        flex-direction:column;
+        gap:30px;
+        padding:40px 30px;
+        min-height:auto;
+    }
+
+    .testimonial-left,
+    .testimonial-right{
+        width:100%;
+    }
+
+    .testimonial-right{
+        order:-1;
+    }
+
+    .slider-dots-vertical{
+        position:static;
+        flex-direction:row;
+        justify-content:center;
+        margin-top:20px;
+    }
+}
+
+@media(max-width:576px){
+
+    .testimonial-title{
+        height:auto;
+        padding:12px 25px;
+        font-size:16px;
+        text-align:center;
+    }
+
+    .testimonial-card{
+        padding:30px 20px;
+    }
+
+    .image-frame{
+        width:180px;
+        height:180px;
+    }
+
+    .image-frame::before{
+        display:none;
+    }
+}
+
+/* PARTNERS */
+
+@media(max-width:576px){
+
+    .partners-section{
+        padding-bottom:50px;
+    }
 }

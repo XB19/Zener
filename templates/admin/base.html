@@ -7,9 +7,15 @@
     box-sizing:border-box;
 }
 
+html{
+    overflow-x:hidden;
+    max-width:100%;
+}
+
 body{
     font-family:Arial,sans-serif;
     background:#f5f8fb;
+    max-width:100%;
 }
 
 .admin-layout{
@@ -154,24 +160,6 @@ body{
     padding:40px;
 }
 
-/* RESPONSIVE */
-
-@media(max-width:992px){
-
-    .sidebar{
-        width:80px;
-    }
-
-    .logo span,
-    .menu a span{
-        display:none;
-    }
-
-    .main-content{
-        margin-left:80px;
-        width:calc(100% - 80px);
-    }
-}
 /* =======================
 ICÔNES
 ======================= */
@@ -347,6 +335,145 @@ ICÔNES
     margin-left:280px;
     margin-top:80px;
 }
+
+/* =======================
+   TOGGLE SIDEBAR (mobile/tablette)
+======================= */
+
+.sidebar-toggle{
+
+    display:none;
+
+    width:42px;
+    height:42px;
+
+    align-items:center;
+    justify-content:center;
+
+    border:none;
+    border-radius:8px;
+
+    background:#f1f5f9;
+    color:#1b60ad;
+
+    font-size:20px;
+
+    cursor:pointer;
+
+    flex-shrink:0;
+}
+
+.admin-overlay{
+
+    display:none;
+
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.4);
+
+    z-index:1999;
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:opacity .3s ease, visibility .3s ease;
+}
+
+.admin-overlay.active{
+
+    opacity:1;
+    visibility:visible;
+}
+
+/* =======================
+   RESPONSIVE
+======================= */
+
+@media(max-width:992px){
+
+    .sidebar{
+        transform:translateX(-100%);
+        transition:transform .3s ease;
+        z-index:2000;
+    }
+
+    .sidebar.active{
+        transform:translateX(0);
+    }
+
+    .topbar{
+        left:0;
+    }
+
+    .main-content{
+        margin-left:0;
+        width:100%;
+    }
+
+    .sidebar-toggle{
+        display:flex;
+    }
+
+    .admin-overlay{
+        display:block;
+    }
+}
+
+@media(max-width:768px){
+
+    .topbar{
+        padding:0 20px;
+    }
+
+    .content{
+        padding:20px;
+    }
+
+    .page-title{
+        font-size:19px;
+    }
+
+    .admin-user span{
+        display:none;
+    }
+}
+
+@media(max-width:480px){
+
+    .topbar{
+        height:70px;
+        padding:0 15px;
+        gap:10px;
+    }
+
+    .main-content{
+        margin-top:70px;
+    }
+
+    .content{
+        padding:15px;
+    }
+
+    .page-title{
+        font-size:16px;
+    }
+
+    .avatar{
+        width:38px;
+        height:38px;
+        font-size:14px;
+    }
+
+    .logout-btn{
+        width:36px;
+        height:36px;
+    }
+
+    .sidebar{
+        width:250px;
+    }
+}
 </style>
 <!DOCTYPE html>
 
@@ -381,7 +508,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
     <!-- SIDEBAR -->
 
-    <aside class="sidebar">
+    <aside class="sidebar" id="adminSidebar">
 
 <div class="logo">
 
@@ -463,6 +590,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
     </aside>
 
+    <div class="admin-overlay" id="adminOverlay"></div>
+
     <!-- MAIN -->
 
     <div class="main-content">
@@ -471,8 +600,24 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
         <header class="topbar">
 
-            <div class="page-title">
-                Tableau de bord
+            <div style="display:flex;align-items:center;gap:15px;">
+
+                <button
+                    type="button"
+                    class="sidebar-toggle"
+                    id="sidebarToggle"
+                    aria-label="Ouvrir le menu"
+                    aria-controls="adminSidebar"
+                    aria-expanded="false">
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+                <div class="page-title">
+                    Tableau de bord
+                </div>
+
             </div>
 
 <div class="admin-user">
@@ -506,6 +651,54 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     </div>
 
 </div>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    const toggle = document.getElementById("sidebarToggle");
+    const sidebar = document.getElementById("adminSidebar");
+    const overlay = document.getElementById("adminOverlay");
+
+    if(toggle && sidebar && overlay){
+
+        const closeSidebar = function(){
+
+            sidebar.classList.remove("active");
+            overlay.classList.remove("active");
+
+            toggle.setAttribute("aria-expanded", "false");
+        };
+
+        const toggleSidebar = function(){
+
+            const isOpen = sidebar.classList.toggle("active");
+
+            overlay.classList.toggle("active", isOpen);
+
+            toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        };
+
+        toggle.addEventListener("click", toggleSidebar);
+
+        overlay.addEventListener("click", closeSidebar);
+
+        sidebar.querySelectorAll("a").forEach(function(link){
+
+            link.addEventListener("click", closeSidebar);
+        });
+
+        window.addEventListener("resize", function(){
+
+            if(window.innerWidth > 992){
+                closeSidebar();
+            }
+        });
+    }
+
+});
+
+</script>
 
 </body>
 
